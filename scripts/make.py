@@ -26,7 +26,7 @@ def main():
     base, stamp = os.path.join(work, "base.mp4"), os.path.join(work, "base.stamp")
     plan = json.load(open(edit, encoding="utf-8"))
     # 컷과 화면 잡는 값이 그대로면 느린 1단계를 다시 하지 않는다
-    sig = json.dumps([plan.get("source"), plan.get("layout"), plan.get("panel_color"),
+    sig = json.dumps([plan.get("source"), plan.get("layout"), plan.get("panel_color"), plan.get("look"),
                       [[c["start"], c["end"], c.get("type"), c.get("tight"), c.get("zoom")] for c in plan["clips"]]])
     if not (os.path.exists(base) and os.path.exists(stamp) and open(stamp, encoding="utf-8").read() == sig):
         say("1/2 컷 이어붙이는 중...")

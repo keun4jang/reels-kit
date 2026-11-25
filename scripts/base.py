@@ -49,6 +49,11 @@ def main():
         src = os.path.join(os.path.dirname(os.path.abspath(plan_path)), src)
     sw, sh, hdr = probe(src)
     tm = TONEMAP if hdr else "format=yuv420p,"
+    look = plan.get("look", {})      # 촬영본 색감: 흑백, 대비, 밝기
+    if look:
+        if look.get("gray"):
+            tm += "hue=s=0,"
+        tm += f"eq=contrast={look.get('contrast', 1.0)}:brightness={look.get('brightness', 0.0)},"
     bg = plan.get("panel_color", "F2EFE9")
     spk_y, spk_h = TL.speaker_area(plan)
     full = spk_h == TL.H
