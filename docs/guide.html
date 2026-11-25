@@ -29,6 +29,11 @@ ul{margin:0;padding-left:5mm}
 li{font-size:13pt;line-height:1.7}
 .say{display:inline-block;background:#16161A;color:#fff;border-radius:8pt;padding:2pt 9pt;font-weight:700;margin:1.5pt 2pt 1.5pt 0;font-size:12pt}
 .q{font-weight:900;font-size:14pt;margin:5mm 0 1mm}
+.pic{display:flex;align-items:center;gap:5mm;margin:3mm 0 3mm}
+.vid{background:#22222A;color:#fff;border-radius:8pt;padding:7pt 12pt;font-weight:700;font-size:12pt}
+.arr{font-weight:900;font-size:20pt;color:#8E8E99}
+.fold{background:#FFC83D;border-radius:4pt 12pt 10pt 10pt;padding:12pt 22pt 9pt;font-weight:900;font-size:14pt;position:relative}
+.fold:before{content:"";position:absolute;left:0;top:-7pt;width:44%;height:9pt;background:#F2B21F;border-radius:6pt 6pt 0 0}
 .foot{position:absolute;left:18mm;bottom:12mm;font-size:9pt;color:#8E8E99}
 </style></head><body>
 
@@ -57,7 +62,7 @@ li{font-size:13pt;line-height:1.7}
  </div></div></div>
  <div class="card"><div class="step"><div class="num">2</div><div>
   <h3>"설치가 끝났습니다"가 나오면 완료</h3>
-  <p class="small">Claude Code를 한 번 껐다가 다시 켜 주세요.</p>
+  <p class="small">바탕화면에 <b>"릴스"</b> 폴더가 새로 생깁니다. Claude Code를 한 번 껐다가 다시 켜 주세요.</p>
  </div></div></div>
  <div class="foot">github.com/keun4jang/reels-kit</div>
 </div>
@@ -66,17 +71,18 @@ li{font-size:13pt;line-height:1.7}
  <div class="brand">릴스 자동편집</div><div class="pill">사용</div>
  <h2><mark>2단계</mark> 릴스 만들기</h2>
  <div class="card"><div class="step"><div class="num">1</div><div>
-  <h3>찍은 영상을 폴더 하나에 넣기</h3>
-  <p class="small">바탕화면에 "릴스" 같은 새 폴더를 만들어 넣으면 편합니다.</p>
+  <h3>바탕화면의 "릴스" 폴더에 영상 넣기</h3>
+  <div class="pic"><span class="vid">▶ 내 영상</span><span class="arr">→</span><span class="fold">릴스</span></div>
+  <p class="small">설치할 때 바탕화면에 생긴 노란 폴더예요. 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</p>
  </div></div></div>
  <div class="card"><div class="step"><div class="num">2</div><div>
-  <h3>그 폴더에서 Claude Code 열기</h3>
-  <p class="small">데스크톱 앱이면 작업 폴더로 그 폴더를 고르세요. 터미널이면 그 폴더에서 claude 를 실행하세요.</p>
+  <h3>Claude Code 켜기</h3>
+  <p class="small">평소처럼 켜기만 하면 됩니다. 폴더를 고르거나 다른 설정을 할 필요가 없어요.</p>
  </div></div></div>
  <div class="card"><div class="step"><div class="num">3</div><div>
-  <h3>한마디 입력</h3>
+  <h3>이렇게 쓰고 엔터</h3>
   <div class="code"><b>›</b>릴스 만들어줘</div>
-  <p class="small">1분짜리 영상 기준으로 5~10분쯤 걸립니다. 끝나면 같은 폴더 안 "완성" 폴더에 릴스가 생깁니다.</p>
+  <p class="small">1분짜리 영상 기준으로 5~10분쯤 걸립니다. 다 되면 "릴스" 폴더 안에 <b>"완성"</b> 폴더가 생기고, 그 안에 릴스가 들어 있어요.</p>
  </div></div></div>
  <h2><mark>3단계</mark> 마음에 안 들면 말로 고치기</h2>
  <div class="card">

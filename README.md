@@ -14,10 +14,10 @@ https://github.com/keun4jang/reels-kit 설치해줘
 
 ## 쓰는 법
 
-1. 찍은 영상을 아무 폴더에 넣습니다.
-2. 그 폴더에서 Claude Code를 엽니다.
+1. 바탕화면에 생긴 `릴스` 폴더에 찍은 영상을 넣습니다.
+2. Claude Code를 엽니다. (어디서 열든 상관없습니다)
 3. `릴스 만들어줘` 라고 입력합니다.
-4. 같은 폴더의 `완성` 폴더에 릴스가 생깁니다.
+4. `릴스` 폴더 안의 `완성` 폴더에 릴스가 생깁니다.
 
 고치고 싶으면 말로 하면 됩니다: "자막 더 크게", "효과음 줄여줘", "영문 자막 빼줘", "그래픽 없이 깔끔하게".
 
@@ -40,7 +40,7 @@ https://github.com/keun4jang/reels-kit 설치해줘
 2. 파이썬이 없으면 설치한다 (Windows `winget install Python.Python.3.12`, Mac `brew install python`).
 3. ffmpeg가 없으면 설치한다 (Windows `winget install Gyan.FFmpeg`, Mac `brew install ffmpeg`).
 4. `python ~/.claude/skills/reels-kit/scripts/setup.py` 를 실행해 "준비 완료"가 나오는지 확인한다 (Mac은 `python3`).
-5. 끝나면 이렇게 알린다: "설치가 끝났습니다. 찍은 영상이 있는 폴더에서 Claude Code를 열고 '릴스 만들어줘'라고 하세요. (지금 창에서 안 되면 Claude Code를 한 번 껐다 켜 주세요.)"
+5. 끝나면 이렇게 알린다: "설치가 끝났습니다. 바탕화면에 '릴스' 폴더를 만들어 두었어요. 거기에 찍은 영상을 넣고 '릴스 만들어줘'라고 말해 주세요. (안 되면 Claude Code를 한 번 껐다 켜 주세요.)"
 
 ## 들어 있는 것과 라이선스
 

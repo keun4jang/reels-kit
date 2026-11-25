@@ -12,7 +12,7 @@ description: 말하는 영상을 세로 릴스로 자동 편집한다(쉬는 구
 ## 일의 흐름
 
 1. **준비 확인.** `python KIT/scripts/setup.py` 를 실행한다. 파이썬이 없으면 먼저 설치한다(Windows `winget install Python.Python.3.12`, Mac `brew install python`). ffmpeg가 없다고 나오면 설치한다(Windows `winget install Gyan.FFmpeg`, Mac `brew install ffmpeg`). 설치 직후 명령을 못 찾으면 새 셸에서 다시 확인한다.
-2. **영상 찾기.** 사용자가 알려준 파일을 쓴다. 말이 없으면 현재 폴더와 그 아래에서 영상(mp4, mov, m4v)을 찾는다. 여러 개면 가장 최근 것을 쓰되 어떤 파일인지 알린다. 하나도 없으면 영상을 현재 폴더에 넣어 달라고 한다.
+2. **영상 찾기.** 사용자가 알려준 파일을 쓴다. 말이 없으면 `python KIT/scripts/find_video.py` 를 실행한다. 바탕화면의 `릴스` 폴더와 현재 폴더에서 영상을 찾아, 아직 릴스로 만들지 않은 최근 영상을 맨 위에 보여준다. 맨 위의 `[새 영상]` 을 쓰고 어떤 파일인지 알린다. `[새 영상]` 이 없으면 "바탕화면의 '릴스' 폴더에 영상을 넣고 다시 말해 주세요"라고 한다. 사용자는 Claude Code를 어느 폴더에서 열었든 상관없어야 한다.
 3. **작업 폴더.** 영상이 있는 폴더에 `릴스작업/<영상이름>/` 을 만들고 중간 파일을 모두 거기 둔다. 완성본은 영상이 있는 폴더의 `완성/<영상이름>_릴스.mp4` 로 낸다.
 4. **받아쓰기.** `python KIT/scripts/transcribe.py <영상> <작업폴더>/transcript.json` (한국어가 아니면 끝에 `large-v3 en` 이나 `large-v3 auto`). 처음에는 모델을 내려받느라 몇 분 걸린다.
 5. **초안.** `python KIT/scripts/plan.py <영상> <작업폴더>/transcript.json <작업폴더>/edit.json`. 쉬는 구간과 다시 말한 문장을 뺀 초안이 나온다.

@@ -25,5 +25,13 @@ if missing:
         print("[실패] pip 설치. 직접 실행: python -m pip install " + " ".join(missing))
     else:
         print("[확인] 패키지 설치 완료")
+try:   # 영상을 넣을 폴더를 바탕화면에 만들어 둔다
+    import os
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from find_video import reels_folder
+    os.makedirs(reels_folder(), exist_ok=True)
+    print("[확인] 영상 넣는 폴더:", reels_folder())
+except Exception as e:
+    print("[참고] 바탕화면에 '릴스' 폴더를 만들지 못했습니다:", e)
 print("준비 완료" if ok else "준비 안 됨: 위 [없음]/[실패] 항목을 해결한 뒤 다시 실행")
 sys.exit(0 if ok else 1)
