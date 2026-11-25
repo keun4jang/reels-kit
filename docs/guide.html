@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><title>릴스 자동편집 사용법</title>
+<style>
+@font-face{font-family:P;font-weight:900;src:url(../assets/fonts/Pretendard-Black.otf)}
+@font-face{font-family:P;font-weight:700;src:url(../assets/fonts/Pretendard-Bold.otf)}
+@font-face{font-family:P;font-weight:600;src:url(../assets/fonts/Pretendard-SemiBold.otf)}
+@page{size:A4;margin:0}
+*{box-sizing:border-box}
+body{margin:0;font-family:P,sans-serif;font-weight:600;color:#16161A;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;padding:20mm 18mm;background:#F2EFE9;page-break-after:always;position:relative;overflow:hidden}
+.page:last-child{page-break-after:auto}
+.brand{font-weight:900;font-size:11pt}
+.pill{position:absolute;right:18mm;top:19mm;border:1.5pt solid #16161A;border-radius:20pt;padding:3pt 11pt;font-weight:700;font-size:9pt}
+h1{font-weight:900;font-size:40pt;line-height:1.15;margin:16mm 0 5mm;letter-spacing:-.5pt}
+h1 mark,h2 mark{background:#FFE033;padding:0 4pt;border-radius:4pt}
+h2{font-weight:900;font-size:25pt;margin:12mm 0 5mm;letter-spacing:-.3pt}
+p{font-size:13pt;line-height:1.6;margin:0 0 3mm}
+.lead{font-size:15pt;color:#44444C}
+.card{background:#fff;border-radius:14pt;padding:8mm 9mm;margin:0 0 6mm;box-shadow:0 5pt 16pt rgba(0,0,0,.08)}
+.step{display:flex;gap:6mm;align-items:flex-start}
+.num{flex:none;width:15mm;height:15mm;border-radius:50%;background:#16161A;color:#FFE033;font-weight:900;font-size:19pt;display:flex;align-items:center;justify-content:center}
+.step h3{font-weight:900;font-size:18pt;margin:1.5mm 0 2mm}
+.code{background:#1B1B20;color:#fff;border-radius:10pt;padding:5mm 6mm;font-weight:700;font-size:13pt;margin:3mm 0 2mm;word-break:break-all}
+.code b{color:#FF8A3D;font-weight:900;margin-right:3mm}
+.small{font-size:11pt;color:#6B6B76;line-height:1.55}
+.shots{display:flex;gap:6mm;margin-top:8mm}
+.shots img{width:54mm;border-radius:10pt;box-shadow:0 5pt 16pt rgba(0,0,0,.14)}
+ul{margin:0;padding-left:5mm}
+li{font-size:13pt;line-height:1.7}
+.say{display:inline-block;background:#16161A;color:#fff;border-radius:8pt;padding:2pt 9pt;font-weight:700;margin:1.5pt 2pt 1.5pt 0;font-size:12pt}
+.q{font-weight:900;font-size:14pt;margin:5mm 0 1mm}
+.foot{position:absolute;left:18mm;bottom:12mm;font-size:9pt;color:#8E8E99}
+</style></head><body>
+
+<div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">사용법</div>
+ <h1>영상 넣고<br><mark>"릴스 만들어줘"</mark><br>한마디면 끝</h1>
+ <p class="lead">Claude Code가 쉬는 구간을 잘라내고,<br>자막 · 그래픽 · 효과음까지 넣어 줍니다.</p>
+ <div class="shots"><img src="ex1.jpg"><img src="ex3.jpg"><img src="ex2.jpg"></div>
+ <p class="small" style="margin-top:5mm">위 화면은 이 키트로 만든 실제 릴스입니다.</p>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+
+<div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">준비 · 설치</div>
+ <h2>준비물</h2>
+ <div class="card"><ul>
+  <li><b>Claude Code</b> (유료 요금제로 로그인된 상태)</li>
+  <li><b>컴퓨터</b> (Windows 또는 Mac) 와 인터넷</li>
+  <li><b>말하는 영상</b> (휴대폰으로 세로로 찍은 영상이면 충분합니다)</li>
+ </ul></div>
+ <h2><mark>1단계</mark> 설치 (처음 한 번만)</h2>
+ <div class="card"><div class="step"><div class="num">1</div><div>
+  <h3>Claude Code를 열고 아래 한 줄을 붙여넣기</h3>
+  <div class="code"><b>›</b>https://github.com/keun4jang/reels-kit 설치해줘</div>
+  <p class="small">Claude가 필요한 도구를 알아서 설치합니다. 중간에 "허용할까요?"라고 물으면 허용을 누르세요. 5~10분쯤 걸립니다.</p>
+ </div></div></div>
+ <div class="card"><div class="step"><div class="num">2</div><div>
+  <h3>"설치가 끝났습니다"가 나오면 완료</h3>
+  <p class="small">Claude Code를 한 번 껐다가 다시 켜 주세요.</p>
+ </div></div></div>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+
+<div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">사용</div>
+ <h2><mark>2단계</mark> 릴스 만들기</h2>
+ <div class="card"><div class="step"><div class="num">1</div><div>
+  <h3>찍은 영상을 폴더 하나에 넣기</h3>
+  <p class="small">바탕화면에 "릴스" 같은 새 폴더를 만들어 넣으면 편합니다.</p>
+ </div></div></div>
+ <div class="card"><div class="step"><div class="num">2</div><div>
+  <h3>그 폴더에서 Claude Code 열기</h3>
+  <p class="small">데스크톱 앱이면 작업 폴더로 그 폴더를 고르세요. 터미널이면 그 폴더에서 claude 를 실행하세요.</p>
+ </div></div></div>
+ <div class="card"><div class="step"><div class="num">3</div><div>
+  <h3>한마디 입력</h3>
+  <div class="code"><b>›</b>릴스 만들어줘</div>
+  <p class="small">1분짜리 영상 기준으로 5~10분쯤 걸립니다. 끝나면 같은 폴더 안 "완성" 폴더에 릴스가 생깁니다.</p>
+ </div></div></div>
+ <h2><mark>3단계</mark> 마음에 안 들면 말로 고치기</h2>
+ <div class="card">
+  <span class="say">자막 더 크게</span><span class="say">효과음 줄여줘</span><span class="say">영문 자막 빼줘</span><span class="say">그래픽 없이 깔끔하게</span><span class="say">더 신나게</span><span class="say">이 부분은 빼줘</span>
+ </div>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+
+<div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">팁</div>
+ <h2>잘 나오게 찍는 법</h2>
+ <div class="card"><ul>
+  <li>휴대폰을 <b>세로</b>로 들고 찍기</li>
+  <li><b>문장 사이에 1초</b> 쉬기 (자를 자리가 깔끔해집니다)</li>
+  <li>틀리면 멈추지 말고 <b>그 문장을 처음부터 다시</b> 말하기 (마지막 것만 남깁니다)</li>
+  <li>조용한 곳에서, 가능하면 마이크 쓰기 (자막이 정확해집니다)</li>
+ </ul></div>
+ <h2>자주 묻는 질문</h2>
+ <div class="card">
+  <p class="q" style="margin-top:0">돈이 더 드나요?</p>
+  <p class="small">키트는 무료입니다. Claude Code 요금제의 사용량만 씁니다.</p>
+  <p class="q">내 영상이 어디로 올라가나요?</p>
+  <p class="small">아니요. 편집은 내 컴퓨터 안에서 합니다. 다만 받아쓴 글과 확인용 장면 몇 장은 Claude가 읽습니다.</p>
+  <p class="q">결과가 매번 완벽한가요?</p>
+  <p class="small">아닙니다. 자막 오타나 어색한 컷이 남을 수 있습니다. 올리기 전에 한 번 보고, 고칠 곳을 말로 알려 주세요.</p>
+  <p class="q">"릴스 만들어줘"가 안 통해요.</p>
+  <p class="small">Claude Code를 껐다 켠 뒤 다시 해 보세요. 그래도 안 되면 1단계 설치 문장을 한 번 더 붙여넣으세요.</p>
+ </div>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+</body></html>
