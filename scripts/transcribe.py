@@ -26,7 +26,7 @@ def main():
     try:
         segs, info = run(model_name, "cuda", "float16", audio, lang)
     except Exception as e:
-        print("GPU 사용 불가, CPU로 진행:", repr(e)[:200], file=sys.stderr)
+        print("그래픽카드 가속 없이 진행합니다(정상, 조금 더 걸립니다).", file=sys.stderr)
         segs, info = run("medium" if model_name == "large-v3" else model_name, "cpu", "int8", audio, lang)
     data = {"duration": round(len(audio) / 16000, 3), "segments": []}
     for s in segs:

@@ -1,6 +1,7 @@
 """1단계 렌더: 컷 이어붙이기 + 얼굴 따라 화면 잡기 + 목소리 정리 -> base.mp4
 사용: python base.py <edit.json> <base.mp4>"""
 import os, subprocess, sys
+os.environ.setdefault("OPENCV_LOG_LEVEL", "ERROR")   # 얼굴 인식 경고 줄을 숨긴다
 import numpy as np
 import timeline as TL
 
@@ -51,7 +52,7 @@ def main():
     bg = plan.get("panel_color", "F2EFE9")
     spk_y, spk_h = TL.speaker_area(plan)
     full = spk_h == TL.H
-    args, fc, tight = ["ffmpeg", "-y", "-v", "error", "-stats"], [], False
+    args, fc, tight = ["ffmpeg", "-y", "-v", "error", "-nostats"], [], False
     for i, c in enumerate(plan["clips"]):
         args += ["-ss", f"{c['start']:.3f}", "-t", f"{c['dur'] + 0.2:.3f}", "-i", src]
         n = round(c["dur"] * TL.FPS)

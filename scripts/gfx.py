@@ -179,6 +179,8 @@ def header(cv, brand, tag, dark=False):
 
 def enter(t, sc, dur=0.3):
     """장면이 시작할 때 살짝 커지며 나타나는 정도 (크기, 투명도)"""
+    if sc["o0"] < 0.05:      # 영상의 첫 장면은 처음부터 다 보이게(썸네일이 빈 화면이 되지 않도록)
+        return 1.0, 1.0
     p = ease((t - sc["o0"]) / dur)
     return 0.92 + 0.08 * p, p
 
@@ -529,8 +531,11 @@ def sc_keyword(cv, t, sc):
 def sc_stat(cv, t, sc):
     """숫자가 올라가는 장면: value(숫자), unit(단위), label(설명)"""
     p = ease((t - sc["o0"]) / 0.7)
-    v = sc["value"] * p
-    num = f"{v:,.0f}" if float(sc["value"]).is_integer() else f"{v:,.1f}"
+    try:
+        v = float(sc["value"]) * p
+        num = f"{v:,.0f}" if float(sc["value"]).is_integer() else f"{v:,.1f}"
+    except (TypeError, ValueError):     # 숫자가 아니면 글자 그대로
+        num = str(sc["value"])
     n = text(num, "black", 250, sc.get("color", INK))
     u = text(sc.get("unit", ""), "black", 110, sc.get("color", INK)) if sc.get("unit") else None
     wd = n.width + (u.width if u else 0)
@@ -548,8 +553,14 @@ SCENES = {"keyword": sc_keyword, "stat": sc_stat, "timeline": sc_timeline, "chec
 
 # ---------- 한 장면 그리기 ----------
 def prepare(plan):
-    for sc in plan.get("scenes", []):
-        sc["o0"], sc["o1"] = TL.to_out(plan, sc["from"]), TL.to_out(plan, sc["to"])
+    scs = sorted(plan.get("scenes", []), key=lambda s: s["from"])
+    plan["scenes"] = scs
+    for i, sc in enumerate(scs):
+        sc["o0"] = TL.to_out(plan, sc["from"])
+        if "to" in sc:
+            sc["o1"] = TL.to_out(plan, sc["to"])
+        else:                 # to 를 안 적으면 다음 장면 시작(또는 영상 끝)까지
+            sc["o1"] = TL.to_out(plan, scs[i + 1]["from"]) if i + 1 < len(scs) else plan["total"]
         sc["c"] = {k: TL.to_out(plan, v) for k, v in sc.get("cues", {}).items()}
         span = sc["o1"] - sc["o0"]
         for pre, key in (("i", "items"), ("s", "steps")):       # 큐를 안 적으면 고르게 나눠 등장
@@ -610,8 +621,17 @@ def main():
     if sys.argv[3] == "--still":
         outdir = sys.argv[5]
         os.makedirs(outdir, exist_ok=True)
-        for ts in sys.argv[4].split(","):
-            t = float(ts)
+        if sys.argv[4] == "scenes":      # 장면마다 가운데와 끝 무렵을 자동으로 고른다
+            times = []
+            for sc in plan["scenes"]:
+                a, b = sc["o0"], max(sc["o0"] + 0.1, min(sc["o1"], plan["total"]))
+                times += [a + (b - a) * 0.5, b - 0.12]
+                print(f"  {sc['type']:10s} 완성본 {a:5.1f}~{b:5.1f}초")
+            if not times:
+                times = [plan["total"] * k / 6 for k in range(1, 6)]
+        else:
+            times = [float(x) for x in sys.argv[4].split(",")]
+        for t in times:
             raw = subprocess.run(["ffmpeg", "-v", "error", "-ss", f"{t:.3f}", "-i", base, "-frames:v", "1",
                                   "-f", "rawvideo", "-pix_fmt", "rgba", "-"], capture_output=True).stdout
             bg = Image.frombytes("RGBA", (W, H), raw) if len(raw) == W * H * 4 else Image.new("RGBA", (W, H), "#F2EFE9")
@@ -621,14 +641,14 @@ def main():
     out = sys.argv[3]
     sfx_dir = os.path.join(KIT, "assets", "sfx")
     events = [(TL.to_out(plan, e["at"]), e["name"], e.get("vol", 0.8) * plan.get("sfx_volume", 0.5)) for e in plan.get("sfx", [])]
-    args = ["ffmpeg", "-y", "-v", "error", "-stats", "-i", base, "-f", "rawvideo", "-pix_fmt", "rgba",
+    args = ["ffmpeg", "-y", "-v", "error", "-nostats", "-i", base, "-f", "rawvideo", "-pix_fmt", "rgba",
             "-s", f"{W}x{H}", "-r", str(FPS), "-i", "-"]
     fc = ["[0:v][1:v]overlay=format=auto:shortest=1,format=yuv420p[v]"]
     for i, (at, name, vol) in enumerate(events):
         args += ["-i", os.path.join(sfx_dir, name + ".wav")]
         fc.append(f"[{i + 2}:a]aresample=48000,volume={vol:.3f},adelay={int(at * 1000)}:all=1[s{i}]")
     mix = "[0:a]" + "".join(f"[s{i}]" for i in range(len(events)))
-    fc.append(f"{mix}amix=inputs={len(events) + 1}:normalize=0:duration=first,alimiter=limit=0.95[a]")
+    fc.append(f"{mix}amix=inputs={len(events) + 1}:normalize=0:duration=first,alimiter=limit=0.89[a]")
     args += ["-filter_complex", ";".join(fc), "-map", "[v]", "-map", "[a]", "-c:v", "libx264", "-preset", "medium",
              "-crf", "17", "-pix_fmt", "yuv420p", "-r", str(FPS), "-colorspace", "bt709", "-color_primaries", "bt709",
              "-color_trc", "bt709", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", out]

@@ -8,7 +8,7 @@ import numpy as np
 
 PAD_IN, PAD_OUT = 0.07, 0.13   # 말 앞뒤 여유(초)
 MIN_SIL = 0.30                 # 이보다 긴 침묵은 잘라낸다
-MAX_CHARS, MAX_WORDS = 10, 3   # 자막 한 덩어리 크기
+MAX_CHARS, MAX_WORDS = 12, 4   # 자막 한 덩어리 크기
 
 
 def speech_intervals(src):
@@ -67,7 +67,8 @@ def main():
     for (s, e), ws in zip(iv, buckets):
         if not ws:
             continue  # 글자가 없는 소리(숨, 잡음)는 버린다
-        clips.append({"start": round(max(0, s - PAD_IN), 3), "end": round(min(dur, e + PAD_OUT), 3),
+        e = min(e, ws[-1]["e"] + 0.35)   # 말이 끝난 뒤의 잡음(카메라 끄는 소리 등)까지 늘어지지 않게
+        clips.append({"start": round(max(0, s - PAD_IN), 3), "end": round(min(dur, max(e, s + 0.3) + PAD_OUT), 3),
                       "text": " ".join(w["w"] for w in ws), "words": ws, "keep": True})
 
     # 다시 말한 문장: 앞의 것을 버리고 마지막 것만 남긴다
@@ -78,8 +79,14 @@ def main():
         for j in range(i + 1, min(i + 4, len(clips))):
             b = norm(clips[j]["text"])
             if SequenceMatcher(None, a, b[: len(a) + 2]).ratio() >= 0.8:
-                c["keep"] = False
-                c["why"] = "다시 말함"
+                last = clips[j]
+                if j == len(clips) - 1 and dur - last["words"][-1]["e"] < 2.5 and last.get("keep"):
+                    # 영상 맨 끝의 반복은 받아쓰기가 지어낸 경우가 많다 -> 앞의 것을 남긴다
+                    last["keep"] = False
+                    last["why"] = "끝부분 반복(받아쓰기 착오 의심, 확인 필요)"
+                else:
+                    c["keep"] = False
+                    c["why"] = "다시 말함"
                 break
 
     # 겹치는 구간 정리
@@ -108,7 +115,7 @@ def main():
 
     plan = {
         "source": os.path.relpath(os.path.abspath(src), os.path.dirname(os.path.abspath(out_path))).replace("\\", "/"),
-        "layout": "full",
+        "layout": "split",
         "brand": "",
         "sfx_volume": 0.55,
         "clips": out_clips,
