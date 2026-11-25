@@ -49,11 +49,14 @@ def main():
         src = os.path.join(os.path.dirname(os.path.abspath(plan_path)), src)
     sw, sh, hdr = probe(src)
     tm = TONEMAP if hdr else "format=yuv420p,"
-    look = plan.get("look", {})      # 촬영본 색감: 흑백, 대비, 밝기
+    look, lk = plan.get("look", {}), ""      # 촬영본 색감: 피부 보정, 흑백, 대비, 밝기
     if look:
+        sm = float(look.get("smooth", 0))
+        if sm > 0:      # 윤곽은 남기고 잔결만 부드럽게 한 뒤, 눈·머리카락이 흐려지지 않게 살짝 선명하게
+            lk += f",bilateral=sigmaS={4 + 8 * sm:.1f}:sigmaR={0.035 + 0.075 * sm:.3f},unsharp=5:5:{0.35 * sm:.2f}:5:5:0"
         if look.get("gray"):
-            tm += "hue=s=0,"
-        tm += f"eq=contrast={look.get('contrast', 1.0)}:brightness={look.get('brightness', 0.0)},"
+            lk += ",hue=s=0"
+        lk += f",eq=contrast={look.get('contrast', 1.0)}:brightness={look.get('brightness', 0.0)}"
     bg = plan.get("panel_color", "F2EFE9")
     spk_y, spk_h = TL.speaker_area(plan)
     full = spk_h == TL.H
@@ -62,7 +65,7 @@ def main():
         args += ["-ss", f"{c['start']:.3f}", "-t", f"{c['dur'] + 0.2:.3f}", "-i", src]
         n = round(c["dur"] * TL.FPS)
         if c.get("type") == "raw":   # 편집 전 원본 그대로
-            v = f"[{i}:v]fps={TL.FPS},{tm}scale={TL.W}:{TL.H}:force_original_aspect_ratio=increase,crop={TL.W}:{TL.H}"
+            v = f"[{i}:v]fps={TL.FPS},{tm}scale={TL.W}:{TL.H}:force_original_aspect_ratio=increase,crop={TL.W}:{TL.H}{lk}"
         else:
             ar = TL.W / spk_h
             face = find_face(src, c["start"], c["end"], sw, sh)
@@ -77,7 +80,7 @@ def main():
             x = min(max(0, cx - cw / 2), sw - cw)
             y = min(max(0, cy - ch * (0.36 if full else 0.44)), sh - ch)
             cw, ch, x, y = (int(round(v / 2)) * 2 for v in (cw, ch, x, y))
-            v = f"[{i}:v]fps={TL.FPS},crop={cw}:{ch}:{x}:{y},{tm}scale={TL.W}:{spk_h}:flags=lanczos"
+            v = f"[{i}:v]fps={TL.FPS},crop={cw}:{ch}:{x}:{y},{tm}scale={TL.W}:{spk_h}:flags=lanczos{lk}"
             if not full:
                 v += f",pad={TL.W}:{TL.H}:0:{spk_y}:color=0x{bg}"
         fc.append(f"{v},trim=end_frame={n},setpts=PTS-STARTPTS,setsar=1[v{i}]")

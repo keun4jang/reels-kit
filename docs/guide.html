@@ -34,6 +34,10 @@ li{font-size:13pt;line-height:1.7}
 .arr{font-weight:900;font-size:20pt;color:#8E8E99}
 .fold{background:#FFC83D;border-radius:4pt 12pt 10pt 10pt;padding:12pt 22pt 9pt;font-weight:900;font-size:14pt;position:relative}
 .fold:before{content:"";position:absolute;left:0;top:-7pt;width:44%;height:9pt;background:#F2B21F;border-radius:6pt 6pt 0 0}
+.card.tight{padding:6mm 8mm;margin-bottom:4mm}
+.card.tight h3{font-size:16pt}
+.key{display:inline-block;background:#16161A;color:#FFE033;border-radius:6pt;padding:0 6pt;font-weight:700}
+.note{background:#FFF6C2;border-radius:12pt;padding:5mm 7mm;font-size:11.5pt;line-height:1.55}
 .foot{position:absolute;left:18mm;bottom:12mm;font-size:9pt;color:#8E8E99}
 </style></head><body>
 
@@ -47,22 +51,50 @@ li{font-size:13pt;line-height:1.7}
 </div>
 
 <div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">처음이라면</div>
+ <h2 style="margin-top:10mm"><mark>0단계</mark> Claude Code 처음 켜기</h2>
+ <p class="small" style="margin-bottom:5mm">이미 Claude Code를 쓰고 있다면 이 쪽은 건너뛰세요.</p>
+ <div class="card tight"><div class="step"><div class="num">1</div><div>
+  <h3>Claude 앱 받아서 설치하기</h3>
+  <div class="code"><b>›</b>claude.com/download</div>
+  <p class="small">인터넷 주소창에 위 주소를 치고, 내 컴퓨터(Windows 또는 Mac)에 맞는 버튼을 눌러 받은 파일을 실행하세요.</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">2</div><div>
+  <h3>앱을 켜고 로그인하기</h3>
+  <p class="small">Claude Code는 <b>유료 요금제</b>(Pro 이상)에서만 쓸 수 있어요. 무료 계정이면 요금제를 올리라는 안내가 나옵니다.</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">3</div><div>
+  <h3>바탕화면에 "릴스" 폴더 만들기</h3>
+  <p class="small">바탕화면 빈 곳에서 <b>마우스 오른쪽 버튼</b> → <b>새로 만들기</b> → <b>폴더</b> → 이름을 <b>릴스</b>로 적고 엔터.<br>(Mac은 오른쪽 버튼 → 새로운 폴더)</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">4</div><div>
+  <h3>앱에서 그 폴더 열기</h3>
+  <p class="small">① 앱 왼쪽 위의 <span class="key">Code</span> 를 누릅니다. (그림만 보이면 마우스를 올려 이름을 확인하세요)<br>
+  ② 글 쓰는 칸 바로 아래 줄에서 첫 번째 버튼을 눌러 <span class="key">Local</span> 을 고릅니다.<br>
+  ③ 그 옆의 폴더 버튼을 눌러 <span class="key">Open folder…</span> → 바탕화면의 <b>릴스</b> 폴더를 고릅니다.</p>
+  <p class="small">이제 글 쓰는 칸에 말을 걸 수 있어요. 버튼 이름은 한글로 보일 수도 있습니다.</p>
+ </div></div></div>
+ <div class="note">도중에 <b>"허용할까요?"</b> 같은 창이 뜨면 <b>허용(Allow)</b>을 누르세요. Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</div>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+
+<div class="page">
  <div class="brand">릴스 자동편집</div><div class="pill">준비 · 설치</div>
  <h2>준비물</h2>
  <div class="card"><ul>
-  <li><b>Claude Code</b> (유료 요금제로 로그인된 상태)</li>
+  <li><b>Claude Code</b> (처음이라면 앞쪽의 0단계부터 하세요)</li>
   <li><b>컴퓨터</b> (Windows 또는 Mac) 와 인터넷</li>
   <li><b>말하는 영상</b> (휴대폰으로 세로로 찍은 영상이면 충분합니다)</li>
  </ul></div>
  <h2><mark>1단계</mark> 설치 (처음 한 번만)</h2>
  <div class="card"><div class="step"><div class="num">1</div><div>
-  <h3>Claude Code를 열고 아래 한 줄을 붙여넣기</h3>
+  <h3>글 쓰는 칸에 아래 한 줄을 그대로 적고 엔터</h3>
   <div class="code"><b>›</b>https://github.com/keun4jang/reels-kit 설치해줘</div>
   <p class="small">Claude가 필요한 도구를 알아서 설치합니다. 중간에 "허용할까요?"라고 물으면 허용을 누르세요. 5~10분쯤 걸립니다.</p>
  </div></div></div>
  <div class="card"><div class="step"><div class="num">2</div><div>
   <h3>"설치가 끝났습니다"가 나오면 완료</h3>
-  <p class="small">바탕화면에 <b>"릴스"</b> 폴더가 새로 생깁니다. Claude Code를 한 번 껐다가 다시 켜 주세요.</p>
+  <p class="small">앱을 한 번 껐다가 다시 켜 주세요. (바탕화면에 "릴스" 폴더가 없었다면 이때 자동으로 생깁니다)</p>
  </div></div></div>
  <div class="foot">github.com/keun4jang/reels-kit</div>
 </div>
@@ -73,11 +105,11 @@ li{font-size:13pt;line-height:1.7}
  <div class="card"><div class="step"><div class="num">1</div><div>
   <h3>바탕화면의 "릴스" 폴더에 영상 넣기</h3>
   <div class="pic"><span class="vid">▶ 내 영상</span><span class="arr">→</span><span class="fold">릴스</span></div>
-  <p class="small">설치할 때 바탕화면에 생긴 노란 폴더예요. 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</p>
+  <p class="small">0단계에서 만든 그 폴더예요. 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</p>
  </div></div></div>
  <div class="card"><div class="step"><div class="num">2</div><div>
-  <h3>Claude Code 켜기</h3>
-  <p class="small">평소처럼 켜기만 하면 됩니다. 폴더를 고르거나 다른 설정을 할 필요가 없어요.</p>
+  <h3>Claude 앱을 켜고 Code 누르기</h3>
+  <p class="small">0단계의 4번처럼 <b>Code</b> 화면으로 들어가면 됩니다. 폴더는 한 번 골라 두었으면 그대로예요.</p>
  </div></div></div>
  <div class="card"><div class="step"><div class="num">3</div><div>
   <h3>이렇게 쓰고 엔터</h3>
