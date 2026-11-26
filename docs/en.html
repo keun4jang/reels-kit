@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keun4jang Kit · Auto-edit videos with Claude Code</title>
+<meta name="description" content="Just shoot. Claude Code does the cuts, captions, motion graphics and sound effects. A free kit made by a working video director.">
+<meta property="og:title" content="Keun4jang Kit · Auto-edit videos with Claude Code">
+<meta property="og:description" content="Just shoot. Claude Code does the editing.">
+<link rel="alternate" hreflang="ko" href="./">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#F2EFE9;--card:#FFFFFF;--ink:#16161A;--sub:#5A5A64;--mute:#8E8E99;--line:#E2DED5;--yellow:#FFE033;--dark:#1B1B20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:500;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:normal;overflow-wrap:break-word}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-weight:900;font-size:17px;letter-spacing:-.2px;text-decoration:none}
+.logo span{color:var(--mute);font-weight:600;margin-left:6px;font-size:13px}
+.pill{border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.pill:hover{background:var(--ink);color:#fff}
+
+.hd{display:flex;align-items:center;gap:8px}
+.lang{display:inline-flex;border:1.5px solid var(--ink);border-radius:99px;overflow:hidden;font-weight:700;font-size:13px}
+.lang a{padding:6px 11px;text-decoration:none;white-space:nowrap}
+.lang a.on{background:var(--ink);color:#fff}
+
+.hero{padding:44px 0 36px}
+.eyebrow{display:inline-block;font-weight:700;font-size:13px;color:var(--sub);border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;margin-bottom:20px}
+h1{font-weight:900;font-size:clamp(38px,9.4vw,72px);line-height:1.12;letter-spacing:-1.5px;margin:0 0 20px}
+h1 mark,h2 mark{background:var(--yellow);color:inherit;padding:0 .12em;border-radius:.14em}
+.lead{font-size:clamp(16px,4.2vw,20px);color:var(--sub);max-width:560px;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:15px 22px;font-weight:800;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:#000}
+.btn.line{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.line:hover{background:#fff}
+.btn.yellow{background:var(--yellow);color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font-size:14px;color:var(--sub);font-weight:600}
+.facts b{color:var(--ink);font-weight:800}
+
+section{padding:44px 0}
+h2{font-weight:900;font-size:clamp(26px,6.4vw,38px);letter-spacing:-.8px;line-height:1.2;margin:0 0 8px}
+.sec-sub{color:var(--sub);margin:0 0 26px;font-size:16px}
+
+.tools{display:grid;gap:16px}
+.tool{background:var(--card);border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(22,22,26,.07);display:grid;gap:20px}
+.no{font-weight:900;font-size:13px;color:var(--mute);letter-spacing:1px}
+.tool h3{font-weight:900;font-size:24px;letter-spacing:-.5px;margin:4px 0 8px}
+.tool p{margin:0 0 14px;color:var(--sub);font-size:15.5px}
+.say{display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;border-radius:12px;padding:13px 16px;font-weight:700;font-size:16px;margin-bottom:14px}
+.say i{color:#FF8A3D;font-style:normal;font-weight:900}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tags span{background:var(--bg);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--sub)}
+.link{font-weight:800;font-size:15px;text-decoration:none;border-bottom:2px solid var(--yellow);padding-bottom:1px}
+.shots{display:flex;gap:10px}
+.shots img{width:0;flex:1;border-radius:12px;display:block;aspect-ratio:9/16;object-fit:cover;background:#ddd}
+.ba{display:flex;gap:10px}
+.ba div{position:relative;flex:1}
+.ba img{width:100%;border-radius:12px;display:block;aspect-ratio:1;object-fit:cover}
+.ba b{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-size:13px}
+.ba b.on{background:var(--yellow);color:var(--ink)}
+
+.steps{display:grid;gap:14px;counter-reset:s}
+.step{background:var(--card);border-radius:18px;padding:22px;display:flex;gap:16px;box-shadow:0 8px 28px rgba(22,22,26,.06)}
+.step:before{counter-increment:s;content:counter(s);flex:none;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--yellow);font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center}
+.step h3{margin:5px 0 6px;font-size:18px;font-weight:900;letter-spacing:-.3px}
+.step p{margin:0;color:var(--sub);font-size:15px}
+.step > div{min-width:0;flex:1}
+.copy{display:flex;align-items:stretch;gap:8px;margin:12px 0 8px}
+.copy code{flex:1;min-width:0;background:var(--dark);color:#fff;border-radius:12px;padding:13px 14px;font-family:inherit;font-weight:700;font-size:14px;overflow-x:auto;white-space:nowrap}
+.copy button{flex:none;border:0;border-radius:12px;background:var(--yellow);color:var(--ink);font-family:inherit;font-weight:800;font-size:14px;padding:0 16px;cursor:pointer}
+.note{background:#FFF6C2;border-radius:16px;padding:18px 20px;font-size:15px;margin-top:16px}
+.note b{font-weight:800}
+.note .btn{margin-top:12px;padding:11px 16px;font-size:14px;border-radius:11px}
+
+details{background:var(--card);border-radius:14px;padding:0 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:800;font-size:16px;padding:17px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-weight:900;color:var(--mute)}
+details[open] summary:after{content:"–"}
+details p{margin:0;padding:0 0 18px;color:var(--sub);font-size:15px}
+
+.guide{background:var(--card);border-radius:18px;padding:0 22px;margin-bottom:12px;box-shadow:0 8px 28px rgba(22,22,26,.06)}
+.guide summary{font-size:18px;font-weight:900;padding:20px 0}
+.guide summary small{display:block;font-weight:600;font-size:13.5px;color:var(--mute);margin-top:2px}
+.guide ol{margin:0;padding:0 0 6px;list-style:none;counter-reset:g}
+.guide li{position:relative;padding:0 0 16px 40px;font-size:15.5px;color:var(--sub)}
+.guide li:before{counter-increment:g;content:counter(g);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--yellow);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+.guide li b{color:var(--ink);font-weight:800}
+.guide .say{display:inline-flex;margin:8px 0 2px;padding:9px 14px;font-size:15px}
+.guide h4{margin:4px 0 10px;font-size:15px;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:20px}
+.chips span{background:var(--ink);color:#fff;border-radius:8px;padding:4px 10px;font-size:13.5px;font-weight:700}
+.guide ul{margin:0;padding:0 0 20px 18px;color:var(--sub);font-size:15.5px}
+.guide ul li{padding:0 0 6px;position:static}
+.guide ul li:before{display:none}
+.key{display:inline-block;background:var(--ink);color:var(--yellow);border-radius:6px;padding:0 7px;font-weight:700;font-size:14px}
+.pdfs{display:grid;gap:12px;margin-bottom:22px}
+.pdf{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:18px;padding:20px 22px;text-decoration:none;box-shadow:0 8px 28px rgba(22,22,26,.07);border:1.5px solid transparent}
+.pdf:hover{border-color:var(--ink)}
+.pdf .ico{flex:none;width:46px;height:56px;border-radius:8px;background:var(--ink);color:var(--yellow);font-weight:900;font-size:12px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.pdf span:nth-child(2){flex:1;min-width:0}
+.pdf b{display:block;font-weight:900;font-size:17.5px;letter-spacing:-.3px}
+.pdf small{display:block;color:var(--mute);font-size:13.5px;font-weight:600}
+.pdf i{flex:none;font-style:normal;font-weight:800;font-size:14px;background:var(--yellow);border-radius:10px;padding:8px 12px}
+@media(min-width:820px){.pdfs{grid-template-columns:1fr 1fr}}
+.no em{font-style:normal;background:var(--yellow);color:var(--ink);border-radius:6px;padding:2px 8px;margin-left:6px;letter-spacing:0}
+.pdf.soon{opacity:.6}
+.pdf.soon i{background:var(--bg);color:var(--sub)}
+.menu{background:var(--card);border-radius:20px;padding:0;margin-bottom:14px;box-shadow:0 8px 28px rgba(22,22,26,.07);scroll-margin-top:12px}
+.menu>summary{align-items:center;justify-content:flex-start;gap:16px;padding:22px 22px}
+.menu>summary .no{flex:none;width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--yellow);display:flex;align-items:center;justify-content:center;font-size:15px;letter-spacing:0}
+.menu>summary .mt{flex:1;min-width:0}
+.menu>summary b{display:block;font-weight:900;font-size:21px;letter-spacing:-.4px;line-height:1.3}
+.menu>summary small{display:block;font-weight:600;font-size:13.5px;color:var(--mute);margin-top:3px}
+.menu>summary em{font-style:normal;font-size:12px;font-weight:800;background:var(--yellow);border-radius:6px;padding:2px 8px;margin-left:4px;vertical-align:middle;white-space:nowrap}
+.menu>summary:after{font-size:26px;line-height:1;color:var(--ink)}
+.menu[open]>summary{border-bottom:1px solid var(--line)}
+.menu .body{padding:22px 22px 26px;max-width:720px}
+.menu .body p{padding:0;margin:0 0 14px;font-size:15.5px;color:var(--sub)}
+.menu .body .intro{font-size:16.5px;color:var(--ink)}
+.menu .body .cap{font-size:13.5px;color:var(--mute);margin-top:8px}
+.menu .body h3{font-weight:900;font-size:20px;letter-spacing:-.4px;margin:34px 0 12px;padding-top:26px;border-top:1px solid var(--line)}
+.menu .body h3 mark{background:var(--yellow);padding:0 .25em;border-radius:.2em;margin-right:4px}
+.menu .body ol{margin:0;padding:0;list-style:none;counter-reset:g}
+.menu .body ol>li{position:relative;padding:0 0 16px 40px;font-size:15.5px;color:var(--sub)}
+.menu .body ol>li:before{counter-increment:g;content:counter(g);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--yellow);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+.menu .body li b,.menu .body p b{color:var(--ink);font-weight:800}
+.menu .body ul{margin:0;padding:0 0 0 18px;color:var(--sub);font-size:15.5px}
+.menu .body ul li{padding:0 0 6px}
+.menu .body .say{display:inline-flex;margin:8px 0 10px}
+.menu .body li .say{display:flex;width:fit-content}
+.menu .body .tip{background:#FFF6C2;border-radius:14px;padding:14px 16px;color:var(--ink);font-size:14.5px;margin-top:6px}
+.menu .body .note{margin:20px 0 0}
+.menu .body .chips{padding-bottom:0}
+.menu .body dl{margin:0}
+.menu .body dt{font-weight:900;font-size:16px;margin-top:16px}
+.menu .body dt:first-child{margin-top:0}
+.menu .body dd{margin:4px 0 0;color:var(--sub);font-size:15px}
+.menu .body .pdf{margin-top:30px;background:var(--bg);box-shadow:none}
+.menu .body .newbie{background:var(--ink);color:#fff;border-radius:14px;padding:14px 16px;font-size:14.5px;margin:0 0 18px}
+.menu .body .newbie b{display:inline-block;background:var(--yellow);color:var(--ink);border-radius:7px;padding:1px 9px;margin-right:8px;font-weight:900}
+.menu .body ol ul.sub{margin:8px 0 0;padding-left:18px;font-size:14.5px}
+.menu .body .ba{max-width:420px;margin:6px 0 16px}
+.menu .body .shots{max-width:480px;margin-top:6px}
+.follow{background:var(--ink);color:#fff;border-radius:26px;padding:38px 26px;text-align:center;margin:20px 0 0}
+.follow h2{color:#fff}
+.follow p{color:#B9B9C4;margin:0 0 22px}
+footer{padding:30px 0 44px;color:var(--mute);font-size:13px;text-align:center}
+footer a{color:var(--sub)}
+
+@media(min-width:820px){
+ .wrap{padding:0 32px}
+ .hero{padding:80px 0 60px}
+ section{padding:64px 0}
+ .tool{grid-template-columns:1.05fr 1fr;align-items:center;padding:36px;gap:36px}
+ .tool:nth-child(even) .pic{order:-1}
+ .steps{grid-template-columns:repeat(3,1fr)}
+ .step{flex-direction:column}
+ .follow{padding:60px 40px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+ <a class="logo" href="#top">Keun4jang<span>Video director</span></a>
+ <span class="hd"><span class="lang" aria-label="언어 선택 / Language"><a href="./" lang="ko">한국어</a><a class="on" href="en.html" lang="en">EN</a></span><a class="pill" href="https://www.instagram.com/keun4jang/">@keun4jang</a></span>
+</header>
+
+<div class="hero" id="top">
+ <span class="eyebrow">A free kit for Claude Code</span>
+ <h1>Just shoot.<br>Edit with <mark>one sentence</mark>.</h1>
+ <p class="lead">Drop a video in a folder, tell Claude Code what you want, and it does the cuts, captions, motion graphics and sound effects. Built by a working video director for everyday use on real shoots.</p>
+ <div class="btns">
+  <a class="btn dark" href="#edit">How to auto-edit a Reel</a>
+  <a class="btn line" href="#menu">See the menu</a>
+ </div>
+ <div class="facts"><span><b>Free</b> · no sign-up</span><span>Runs on <b>your computer</b></span><span><b>Windows · Mac</b></span></div>
+</div>
+
+<section id="menu">
+ <h2>Menu</h2>
+ <p class="sec-sub">Tap a title to open its <b>guide for total beginners</b>. More features are on the way.</p>
+
+ <details class="menu" id="edit">
+  <summary><span class="no">01</span><span class="mt"><b>Reels auto-edit</b><small>Cuts · Korean + English captions · motion graphics · sound effects</small></span></summary>
+  <div class="body">
+   <p class="newbie"><b>Guide for total beginners</b>You do not need to know computers. No jargon. Just follow the steps from top to bottom.</p>
+   <p class="intro">Turns a talking video into a vertical Reel that is ready to post. It cuts out pauses and retakes, then adds captions, motion graphics and sound effects.</p>
+   <div class="say"><i>›</i>릴스 만들어줘</div>
+   <p class="cap">This Korean command means "Make a Reel".</p>
+   <div class="shots"><img src="ex1.jpg" alt="Auto-edit example 1" loading="lazy"><img src="ex3.jpg" alt="Auto-edit example 2" loading="lazy"><img src="ex2.jpg" alt="Auto-edit example 3" loading="lazy"></div>
+   <p class="cap">Frames from a real Reel made with this kit.</p>
+   <p class="tip"><b>Works best with Korean speech.</b> Auto-edit listens to the video as Korean by default and writes Korean captions with an English line under them. Videos spoken in other languages have not been tested. Skin retouch (menu 02) works with any language.</p>
+
+   <div class="note"><b>Reading this on your phone?</b> The install has to be done on a computer. Copy this address and open it there.
+    <div><button class="btn dark" type="button" data-copy="url">Copy this page address</button></div>
+   </div>
+
+   <h3>What you need</h3>
+   <ul>
+    <li><b>Claude Code</b> (paid plan, Pro or higher. If you are new, start at Step 0 below)</li>
+    <li>A <b>computer</b> (Windows or Mac) and internet</li>
+    <li>A <b>talking video</b> (a vertical phone video is enough)</li>
+   </ul>
+
+   <p class="tip"><b>Before you start.</b> This kit was built and tested by a Korean creator. The buttons you click are the same, but the commands below are Korean. Copy and paste them as they are. You can also try asking Claude in English, but that has not been tested.</p>
+   <h3><mark>Step 0</mark> Open Claude Code for the first time</h3>
+   <p class="cap">Already using Claude Code? Skip this. If you are new, this is the most important part.</p>
+   <ol>
+    <li><b>Download and install the Claude app.</b> On your computer, go to <a class="link" href="https://claude.com/download">claude.com/download</a>, click the button for your computer (Windows or Mac), and run the file you downloaded.</li>
+    <li><b>Open the app and sign in.</b> Claude Code needs a paid plan (Pro or higher). On a free account you will be asked to upgrade.</li>
+    <li><b>Make a folder named "릴스" on your desktop.</b> Right-click an empty spot on the desktop → New → Folder (Mac: right-click → New Folder). The kit looks for this exact Korean name, which means "Reels", so copy it here and paste it as the folder name.
+     <div class="copy"><code id="fcmd">릴스</code><button type="button" data-copy="fcmd">Copy</button></div>
+     <b>Every video you shoot goes into this folder.</b> You can also skip this: the install in Step 1 creates the folder for you.</li>
+    <li><b>Click Code in the Claude app.</b> The app usually opens on the chat screen. Click <span class="key">Code</span> at the <b>top left</b> to switch to Claude Code. If you only see icons, hover over them to see their names.</li>
+    <li><b>Choose Local.</b> There is a box for typing in the middle of the screen. Click the <b>first button on the row just below it</b> and choose <span class="key">Local</span>. It means "work on my own computer".</li>
+    <li><b>Connect the "릴스" folder.</b> Click the <b>folder button right next to it</b> and choose <span class="key">Open folder…</span>. In the window that opens, click <b>Desktop</b> on the left, click the <b>릴스</b> folder once, then click <b>Select Folder</b> (Mac: <b>Open</b>).</li>
+    <li><b>Check that it is connected.</b> If the folder button now says <b>릴스</b>, you are done. You can start typing to Claude. You only connect once. Next time, just click Code.</li>
+   </ol>
+   <p class="tip">If a window asks <b>"Allow?"</b> along the way, click <b>Allow</b>. Claude is asking whether it may work on your computer.</p>
+
+   <h3><mark>Step 1</mark> Install (only once)</h3>
+   <ol>
+    <li><b>Paste this one line into the typing box and press Enter.</b> The Korean word at the end means "install this". Click "Copy", click the typing box once, then paste (Ctrl+V on Windows, ⌘+V on Mac).
+     <div class="copy"><code id="cmd">https://github.com/keun4jang/reels-kit 설치해줘</code><button type="button" data-copy="cmd">Copy</button></div>
+     Claude installs everything it needs. It takes about 5 to 10 minutes. If "Allow?" comes up several times, keep clicking Allow.</li>
+    <li><b>When Claude says the install is finished, you are done.</b> Close the app once and open it again. (If there was no "릴스" folder on your desktop, it is created now.)</li>
+   </ol>
+
+   <h3><mark>Step 2</mark> Make a Reel</h3>
+   <ol>
+    <li><b>Move the video from your phone to your computer.</b> Use whichever way is easiest.
+     <ul class="sub">
+      <li>iPhone → Mac: pick the video in Photos, tap Share → <b>AirDrop</b> → your Mac</li>
+      <li>Cable: connect the phone to the computer with its <b>charging cable</b> and copy the video file</li>
+      <li>Cloud: upload it to Google Drive or iCloud, then download it on the computer</li>
+      <li>Messaging apps often shrink videos. If you use one, send the file at <b>original quality</b>.</li>
+     </ul></li>
+    <li><b>Put the video in the "릴스" folder on your desktop.</b> Double-click the <b>릴스</b> folder to open it and drag the video file into it. If you can see the video inside the folder, it worked. If there are several videos, the kit uses the <b>most recent one</b>.</li>
+    <li><b>Open the Claude app and click Code at the top left.</b> Check that the folder button says <b>릴스</b>. If it shows another name, redo number 6 of Step 0.</li>
+    <li><b>Paste this into the typing box and press Enter.</b>
+     <div class="copy"><code id="say1">릴스 만들어줘</code><button type="button" data-copy="say1">Copy</button></div>
+     A one-minute video takes about 5 to 10 minutes. If "Allow?" comes up while you wait, click Allow.</li>
+    <li><b>Find the finished Reel.</b> A folder named <b>"완성"</b> ("Finished") appears inside the "릴스" folder on your desktop, with the Reel in it. Move that file to your phone and post it.</li>
+   </ol>
+
+   <h3><mark>Step 3</mark> Fix it by asking</h3>
+   <p class="cap">Not happy with the result? Just tell Claude what to change, for example:</p>
+   <div class="chips"><span>Make the captions bigger</span><span>Turn the sound effects down</span><span>Remove the English captions</span><span>Keep it clean, no graphics</span><span>Make it more energetic</span><span>Cut this part</span></div>
+
+   <h3>How to shoot for good results</h3>
+   <ul>
+    <li>Hold the phone <b>vertically</b></li>
+    <li><b>Pause one second between sentences</b> (the cuts come out cleaner)</li>
+    <li>If you make a mistake, do not stop. <b>Say that sentence again from the start</b> (only the last take is kept)</li>
+    <li>Shoot somewhere quiet, with a microphone if you can (the captions are more accurate)</li>
+   </ul>
+
+   <h3>Questions people ask</h3>
+   <dl>
+    <dt>Does it cost extra?</dt><dd>The kit is free. It only uses your Claude Code plan's usage.</dd>
+    <dt>Is my video uploaded somewhere?</dt><dd>Editing happens on your computer. Claude does read the transcript and a few frames to check the result.</dd>
+    <dt>Is the result perfect every time?</dt><dd>No. There can be caption typos or awkward cuts. Watch it once before posting and tell Claude what to fix.</dd>
+    <dt>The command does not work.</dt><dd>Close Claude Code and open it again. If it still does not work, paste the install line from Step 1 once more.</dd>
+   </dl>
+
+   <a class="pdf" href="guide.pdf"><span class="ico">PDF</span><span><b>Get this as a PDF</b><small>Korean only · Reels auto-edit · 6 pages</small></span><i>Get ↓</i></a>
+   <p class="cap">The PDF is in Korean only. It may not open inside Instagram. If so, tap ⋯ at the top right and choose "Open in external browser". This page has the same content.</p>
+  </div>
+ </details>
+
+ <details class="menu" id="skin">
+  <summary><span class="no">02</span><span class="mt"><b>Skin retouch · makeup</b><small>Skin retouch · lip color · blush · eye makeup · sunglasses</small></span></summary>
+  <div class="body">
+   <p class="newbie"><b>Guide for total beginners</b>You do not need to know computers. No jargon. Just follow the steps from top to bottom.</p>
+   <p class="intro">Finds the faces in your video and cleans up the skin only. If you want, it adds lip color, blush and eye makeup. It follows the face while you talk or turn your head.</p>
+   <div class="say"><i>›</i>화장해줘</div>
+   <p class="cap">This Korean command means "Put makeup on".</p>
+   <div class="ba"><div><img src="skin_before.jpg" alt="Before" loading="lazy"><b>Before</b></div><div><img src="skin_after.jpg" alt="After" loading="lazy"><b class="on">After</b></div></div>
+   <p class="cap">The same frame of the same video. Blemishes and blotches are reduced. Lips and outlines stay as they are.</p>
+
+   <div class="note"><b>Reading this on your phone?</b> The install has to be done on a computer. Copy this address and open it there.
+    <div><button class="btn dark" type="button" data-copy="url">Copy this page address</button></div>
+   </div>
+
+   <h3>What you need</h3>
+   <ul>
+    <li><b>Claude Code</b> (paid plan, Pro or higher. If you are new, start at Step 0 below)</li>
+    <li>A <b>computer</b> (Windows or Mac) and internet</li>
+    <li>A <b>video with a face in it</b> (a phone video is enough)</li>
+   </ul>
+
+   <p class="tip"><b>Before you start.</b> This kit was built and tested by a Korean creator. The buttons you click are the same, but the commands below are Korean. Copy and paste them as they are. You can also try asking Claude in English, but that has not been tested.</p>
+   <h3><mark>Step 0</mark> Open Claude Code for the first time</h3>
+   <p class="cap">Already using Claude Code? Skip this. If you are new, this is the most important part.</p>
+   <ol>
+    <li><b>Download and install the Claude app.</b> On your computer, go to <a class="link" href="https://claude.com/download">claude.com/download</a>, click the button for your computer (Windows or Mac), and run the file you downloaded.</li>
+    <li><b>Open the app and sign in.</b> Claude Code needs a paid plan (Pro or higher). On a free account you will be asked to upgrade.</li>
+    <li><b>Make a folder named "릴스" on your desktop.</b> Right-click an empty spot on the desktop → New → Folder (Mac: right-click → New Folder). The kit looks for this exact Korean name, which means "Reels", so copy it here and paste it as the folder name.
+     <div class="copy"><code id="fcmd2">릴스</code><button type="button" data-copy="fcmd2">Copy</button></div>
+     <b>Every video you shoot goes into this folder.</b> You can also skip this: the install in Step 1 creates the folder for you.</li>
+    <li><b>Click Code in the Claude app.</b> The app usually opens on the chat screen. Click <span class="key">Code</span> at the <b>top left</b> to switch to Claude Code. If you only see icons, hover over them to see their names.</li>
+    <li><b>Choose Local.</b> There is a box for typing in the middle of the screen. Click the <b>first button on the row just below it</b> and choose <span class="key">Local</span>. It means "work on my own computer".</li>
+    <li><b>Connect the "릴스" folder.</b> Click the <b>folder button right next to it</b> and choose <span class="key">Open folder…</span>. In the window that opens, click <b>Desktop</b> on the left, click the <b>릴스</b> folder once, then click <b>Select Folder</b> (Mac: <b>Open</b>).</li>
+    <li><b>Check that it is connected.</b> If the folder button now says <b>릴스</b>, you are done. You can start typing to Claude. You only connect once. Next time, just click Code.</li>
+   </ol>
+   <p class="tip">If a window asks <b>"Allow?"</b> along the way, click <b>Allow</b>. Claude is asking whether it may work on your computer.</p>
+
+   <h3><mark>Step 1</mark> Install (only once)</h3>
+   <ol>
+    <li><b>Paste this one line into the typing box and press Enter.</b> The Korean word at the end means "install this". Click "Copy", click the typing box once, then paste (Ctrl+V on Windows, ⌘+V on Mac).
+     <div class="copy"><code id="cmd2">https://github.com/keun4jang/reels-kit 설치해줘</code><button type="button" data-copy="cmd2">Copy</button></div>
+     Claude installs everything it needs. It takes about 5 to 10 minutes. If "Allow?" comes up several times, keep clicking Allow.</li>
+    <li><b>When Claude says the install is finished, you are done.</b> Close the app once and open it again. (If there was no "릴스" folder on your desktop, it is created now.)</li>
+   </ol>
+   <p class="tip"><b>Already installed the Reels auto-edit kit?</b> Skin retouch was added to the same kit. Paste the line above once more to get the new feature.</p>
+
+   <h3><mark>Step 2</mark> Retouch and add makeup</h3>
+   <ol>
+    <li><b>Move the video from your phone to your computer.</b> Use whichever way is easiest.
+     <ul class="sub">
+      <li>iPhone → Mac: pick the video in Photos, tap Share → <b>AirDrop</b> → your Mac</li>
+      <li>Cable: connect the phone to the computer with its <b>charging cable</b> and copy the video file</li>
+      <li>Cloud: upload it to Google Drive or iCloud, then download it on the computer</li>
+      <li>Messaging apps often shrink videos. If you use one, send the file at <b>original quality</b>.</li>
+     </ul></li>
+    <li><b>Put the video in the "릴스" folder on your desktop.</b> Double-click the <b>릴스</b> folder to open it and drag the video file into it. If you can see the video inside the folder, it worked. If there are several videos, the kit uses the <b>most recent one</b>.</li>
+    <li><b>Open the Claude app and click Code at the top left.</b> Check that the folder button says <b>릴스</b>. If it shows another name, redo number 6 of Step 0.</li>
+    <li><b>Paste this into the typing box and press Enter.</b> It means "Retouch the skin".
+     <div class="copy"><code id="say2">피부 보정해줘</code><button type="button" data-copy="say2">Copy</button></div>
+     For makeup as well, use this one. It means "Put makeup on".
+     <div class="copy"><code id="say3">화장해줘</code><button type="button" data-copy="say3">Copy</button></div>
+     A one-minute video takes about 3 to 5 minutes. If "Allow?" comes up while you wait, click Allow.</li>
+    <li><b>Find the result.</b> A folder named <b>"피부보정"</b> ("Skin retouch") appears inside the "릴스" folder on your desktop. It holds the retouched video and a before/after picture.</li>
+   </ol>
+
+   <h3><mark>Step 3</mark> Adjust it by asking</h3>
+   <div class="chips"><span>More natural</span><span>Stronger</span><span>Coral lips</span><span>Change it to pink</span><span>No eye makeup</span><span>Add sunglasses</span><span>Make it a Reel too</span></div>
+   <p class="cap">The video's size, length and sound stay the same. Your original file is not touched.</p>
+
+   <h3>How to shoot for good results</h3>
+   <ul>
+    <li>Shoot in a <b>bright place</b> (by a window or in front of a light. Blotches show more in the dark)</li>
+    <li>Keep your face <b>large in the frame and facing the camera</b></li>
+    <li>Take off your glasses, and keep <b>hair away from your eyes and lips</b></li>
+    <li>Look at the default first. If it is not enough, ask for <b>"stronger"</b></li>
+   </ul>
+
+   <h3>Questions people ask</h3>
+   <dl>
+    <dt>Will my eyes or hair get blurry too?</dt><dd>No. Only the skin is retouched. Eyes, eyebrows, lips, hair and the background are left alone.</dd>
+    <dt>What changes?</dt><dd>Blemishes, acne marks, fine lines and blotchy skin tone are reduced. With the makeup command you also get lip color, blush, eye makeup and a brighter tone. It does not change the shape of your face.</dd>
+    <dt>Do the sunglasses look real?</dt><dd>No. They are a drawing that follows your eyes, so they look like a sticker. If you shoot with glasses on, the frames may stick out.</dd>
+    <dt>Does it work with several people?</dt><dd>Yes. It finds and retouches every face on screen.</dd>
+    <dt>Does it cost extra? Is my video uploaded somewhere?</dt><dd>The kit is free and only uses your Claude Code plan's usage. Retouching happens on your computer. Claude only reads a few frames to check the result.</dd>
+    <dt>The command does not work.</dt><dd>Close Claude Code and open it again. If it still does not work, paste the install line from Step 1 once more.</dd>
+   </dl>
+
+   <a class="pdf" href="guide-skin.pdf"><span class="ico">PDF</span><span><b>Get this as a PDF</b><small>Korean only · Skin retouch · makeup · 6 pages</small></span><i>Get ↓</i></a>
+   <p class="cap">The PDF is in Korean only. It may not open inside Instagram. If so, tap ⋯ at the top right and choose "Open in external browser". This page has the same content.</p>
+  </div>
+ </details>
+</section>
+
+<div class="follow">
+ <h2>New features land on Instagram first</h2>
+ <p>Every new feature gets its own Reel.<br>Follow along and it arrives in the same kit.</p>
+ <a class="btn yellow" href="https://www.instagram.com/keun4jang/">Follow @keun4jang</a>
+</div>
+
+<footer>
+ Made by Keun4jang · <a href="https://github.com/keun4jang/reels-kit">View the source on GitHub</a><br>
+ Claude and Claude Code are products of Anthropic. This kit is a personal project and is not affiliated with Anthropic.
+</footer>
+
+</div>
+<script>
+document.querySelectorAll(".lang a").forEach(function (a) {
+  a.addEventListener("click", function () { a.href = a.getAttribute("href").split("#")[0] + location.hash; });
+});
+document.querySelectorAll("[data-copy]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var k = b.getAttribute("data-copy");
+    var text = k === "url" ? location.href.split("#")[0] : document.getElementById(k).textContent;
+    var done = function () { var t = b.textContent; b.textContent = "Copied"; setTimeout(function () { b.textContent = t; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+    function fallback() {
+      var a = document.createElement("textarea"); a.value = text; document.body.appendChild(a); a.select();
+      try { document.execCommand("copy"); done(); } catch (e) {} document.body.removeChild(a);
+    }
+  });
+});
+var menus = document.querySelectorAll("details.menu");
+menus.forEach(function (d) {
+  d.addEventListener("toggle", function () {
+    if (!d.open) return;
+    menus.forEach(function (o) { if (o !== d) o.open = false; });
+    if (history.replaceState) history.replaceState(null, "", "#" + d.id);
+  });
+});
+function openHash() {
+  var d = location.hash && document.querySelector("details.menu" + location.hash);
+  if (d) { d.open = true; setTimeout(function () { d.scrollIntoView(); }, 60); }
+}
+window.addEventListener("hashchange", openHash); openHash();
+</script>
+</body>
+</html>

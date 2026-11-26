@@ -7,6 +7,7 @@
 <meta name="description" content="찍기만 하세요. 컷편집, 자막, 모션그래픽, 효과음까지 Claude Code가 합니다. 영상감독이 만든 무료 키트.">
 <meta property="og:title" content="근사장 키트 · Claude Code로 영상 자동편집">
 <meta property="og:description" content="찍기만 하세요. 편집은 Claude Code가 합니다.">
+<link rel="alternate" hreflang="en" href="en.html">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
 <style>
 :root{--bg:#F2EFE9;--card:#FFFFFF;--ink:#16161A;--sub:#5A5A64;--mute:#8E8E99;--line:#E2DED5;--yellow:#FFE033;--dark:#1B1B20}
@@ -20,6 +21,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 .logo span{color:var(--mute);font-weight:600;margin-left:6px;font-size:13px}
 .pill{border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
 .pill:hover{background:var(--ink);color:#fff}
+
+.hd{display:flex;align-items:center;gap:8px}
+.lang{display:inline-flex;border:1.5px solid var(--ink);border-radius:99px;overflow:hidden;font-weight:700;font-size:13px}
+.lang a{padding:6px 11px;text-decoration:none;white-space:nowrap}
+.lang a.on{background:var(--ink);color:#fff}
 
 .hero{padding:44px 0 36px}
 .eyebrow{display:inline-block;font-weight:700;font-size:13px;color:var(--sub);border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;margin-bottom:20px}
@@ -164,7 +170,7 @@ footer a{color:var(--sub)}
 
 <header>
  <a class="logo" href="#top">근사장<span>영상감독</span></a>
- <a class="pill" href="https://www.instagram.com/keun4jang/">@keun4jang</a>
+ <span class="hd"><span class="lang" aria-label="언어 선택 / Language"><a class="on" href="./" lang="ko">한국어</a><a href="en.html" lang="en">EN</a></span><a class="pill" href="https://www.instagram.com/keun4jang/">@keun4jang</a></span>
 </header>
 
 <div class="hero" id="top">
@@ -366,6 +372,9 @@ footer a{color:var(--sub)}
 
 </div>
 <script>
+document.querySelectorAll(".lang a").forEach(function (a) {
+  a.addEventListener("click", function () { a.href = a.getAttribute("href").split("#")[0] + location.hash; });
+});
 document.querySelectorAll("[data-copy]").forEach(function (b) {
   b.addEventListener("click", function () {
     var k = b.getAttribute("data-copy");
