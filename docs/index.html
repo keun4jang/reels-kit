@@ -136,6 +136,9 @@ details p{margin:0;padding:0 0 18px;color:var(--sub);font-size:15px}
 .menu .body dt:first-child{margin-top:0}
 .menu .body dd{margin:4px 0 0;color:var(--sub);font-size:15px}
 .menu .body .pdf{margin-top:30px;background:var(--bg);box-shadow:none}
+.menu .body .newbie{background:var(--ink);color:#fff;border-radius:14px;padding:14px 16px;font-size:14.5px;margin:0 0 18px}
+.menu .body .newbie b{display:inline-block;background:var(--yellow);color:var(--ink);border-radius:7px;padding:1px 9px;margin-right:8px;font-weight:900}
+.menu .body ol ul.sub{margin:8px 0 0;padding-left:18px;font-size:14.5px}
 .menu .body .ba{max-width:420px;margin:6px 0 16px}
 .menu .body .shots{max-width:480px;margin-top:6px}
 .follow{background:var(--ink);color:#fff;border-radius:26px;padding:38px 26px;text-align:center;margin:20px 0 0}
@@ -177,11 +180,12 @@ footer a{color:var(--sub)}
 
 <section id="menu">
  <h2>메뉴</h2>
- <p class="sec-sub">제목을 누르면 사용법이 펼쳐집니다. 기능은 계속 추가됩니다.</p>
+ <p class="sec-sub">제목을 누르면 <b>왕초보를 위한 설명서</b>가 펼쳐집니다. 기능은 계속 추가됩니다.</p>
 
  <details class="menu" id="edit">
   <summary><span class="no">01</span><span class="mt"><b>릴스 자동편집</b><small>컷편집 · 한글+영문 자막 · 모션그래픽 · 효과음</small></span></summary>
   <div class="body">
+   <p class="newbie"><b>왕초보를 위한 설명서</b>컴퓨터를 잘 몰라도 됩니다. 어려운 말 없이 적었으니, 위에서부터 순서대로만 따라 하세요.</p>
    <p class="intro">말하는 영상을 올릴 수 있는 세로 릴스로 만듭니다. 쉬는 구간과 다시 말한 문장을 잘라내고, 자막과 모션그래픽, 효과음을 넣습니다.</p>
    <div class="say"><i>›</i>릴스 만들어줘</div>
    <div class="shots"><img src="ex1.jpg" alt="자동편집 예시 1" loading="lazy"><img src="ex3.jpg" alt="자동편집 예시 2" loading="lazy"><img src="ex2.jpg" alt="자동편집 예시 3" loading="lazy"></div>
@@ -199,30 +203,41 @@ footer a{color:var(--sub)}
    </ul>
 
    <h3><mark>0단계</mark> Claude Code 처음 켜기</h3>
-   <p class="cap">이미 Claude Code를 쓰고 있다면 건너뛰세요.</p>
+   <p class="cap">이미 Claude Code를 쓰고 있다면 건너뛰세요. 처음이라면 여기가 가장 중요합니다.</p>
    <ol>
     <li><b>Claude 앱 받아서 설치하기.</b> 컴퓨터에서 <a class="link" href="https://claude.com/download">claude.com/download</a> 에 들어가 내 컴퓨터(Windows 또는 Mac)에 맞는 버튼을 누르고, 받은 파일을 실행합니다.</li>
     <li><b>앱을 켜고 로그인하기.</b> Claude Code는 유료 요금제(Pro 이상)에서만 쓸 수 있습니다. 무료 계정이면 요금제를 올리라는 안내가 나옵니다.</li>
-    <li><b>바탕화면에 "릴스" 폴더 만들기.</b> 바탕화면 빈 곳에서 마우스 오른쪽 버튼 → 새로 만들기 → 폴더 → 이름을 <b>릴스</b>로 적고 엔터. (Mac은 오른쪽 버튼 → 새로운 폴더)</li>
-    <li><b>앱에서 그 폴더 열기.</b> 앱 왼쪽 위의 <span class="key">Code</span> 를 누릅니다. 글 쓰는 칸 바로 아래 줄에서 첫 번째 버튼을 눌러 <span class="key">Local</span> 을 고르고, 그 옆의 폴더 버튼 → <span class="key">Open folder…</span> → 바탕화면의 <b>릴스</b> 폴더를 고릅니다. 버튼 이름은 한글로 보일 수도 있습니다.</li>
+    <li><b>바탕화면에 "릴스" 폴더 만들기.</b> 바탕화면 빈 곳에서 마우스 오른쪽 버튼 → 새로 만들기 → 폴더 → 이름을 <b>릴스</b>로 적고 엔터. (Mac은 오른쪽 버튼 → 새로운 폴더) <b>앞으로 찍은 영상은 전부 이 폴더에 넣습니다.</b></li>
+    <li><b>Claude 앱에서 Code 누르기.</b> 앱을 켜면 보통 대화하는 화면이 먼저 나옵니다. 앱 <b>왼쪽 위</b>에 있는 <span class="key">Code</span> 를 누르면 Claude Code 화면으로 바뀝니다. 글자 없이 그림만 보이면 마우스를 올려 이름을 확인하세요.</li>
+    <li><b>Local 고르기.</b> 화면 가운데 글 쓰는 칸이 있습니다. 그 <b>바로 아래 줄의 첫 번째 버튼</b>을 눌러 <span class="key">Local</span> 을 고릅니다. "내 컴퓨터에서 작업한다"는 뜻입니다.</li>
+    <li><b>"릴스" 폴더 연결하기.</b> 방금 누른 버튼 <b>바로 옆의 폴더 버튼</b>을 누르고 <span class="key">Open folder…</span> 를 고릅니다. 파일 고르는 창이 뜨면 왼쪽에서 <b>바탕화면(Desktop)</b>을 누르고, <b>릴스</b> 폴더를 한 번 눌러 고른 뒤 아래의 <b>폴더 선택</b>(Mac은 <b>열기</b>)을 누릅니다.</li>
+    <li><b>연결됐는지 확인하기.</b> 폴더 버튼에 <b>릴스</b>라고 보이면 끝입니다. 이제 글 쓰는 칸에 말을 걸 수 있습니다. 한 번 연결해 두면 다음부터는 Code만 누르면 됩니다.</li>
    </ol>
-   <p class="tip">도중에 <b>"허용할까요?"</b> 같은 창이 뜨면 <b>허용(Allow)</b>을 누르세요. Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</p>
+   <p class="tip">버튼 이름은 한글로 보일 수도 있습니다. 도중에 <b>"허용할까요?"</b> 같은 창이 뜨면 <b>허용(Allow)</b>을 누르세요. Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</p>
 
    <h3><mark>1단계</mark> 설치 (처음 한 번만)</h3>
    <ol>
-    <li><b>글 쓰는 칸에 아래 한 줄을 그대로 붙여넣고 엔터.</b>
+    <li><b>글 쓰는 칸에 아래 한 줄을 그대로 붙여넣고 엔터.</b> 오른쪽의 "복사"를 누른 뒤, 글 쓰는 칸을 한 번 누르고 붙여넣기(Windows는 Ctrl+V, Mac은 ⌘+V) 하면 됩니다.
      <div class="copy"><code id="cmd">https://github.com/keun4jang/reels-kit 설치해줘</code><button type="button" data-copy="cmd">복사</button></div>
-     Claude가 필요한 도구를 알아서 설치합니다. 5~10분쯤 걸립니다.</li>
+     Claude가 필요한 도구를 알아서 설치합니다. 5~10분쯤 걸립니다. 그동안 "허용할까요?"가 여러 번 나오면 계속 허용을 누르세요.</li>
     <li><b>"설치가 끝났습니다"가 나오면 완료.</b> 앱을 한 번 껐다가 다시 켜 주세요. (바탕화면에 "릴스" 폴더가 없었다면 이때 자동으로 생깁니다)</li>
    </ol>
 
    <h3><mark>2단계</mark> 릴스 만들기</h3>
    <ol>
-    <li><b>바탕화면의 "릴스" 폴더에 영상 넣기.</b> 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</li>
-    <li><b>Claude 앱을 켜고 Code 누르기.</b> 폴더는 한 번 골라 두었으면 그대로입니다.</li>
-    <li><b>이렇게 쓰고 엔터.</b>
+    <li><b>휴대폰으로 찍은 영상을 컴퓨터로 옮기기.</b> 편한 방법 하나만 쓰면 됩니다.
+     <ul class="sub">
+      <li>아이폰 → Mac: 사진 앱에서 영상을 고르고 공유 → <b>AirDrop</b> → 내 Mac</li>
+      <li>케이블: 휴대폰을 컴퓨터에 <b>충전 케이블</b>로 연결해 영상 파일을 꺼내기</li>
+      <li>카카오톡: <b>나와의 채팅</b>에 영상을 보내고 컴퓨터 카카오톡에서 내려받기. 보낼 때 화질을 <b>원본</b>으로 고르세요. 안 그러면 화질이 떨어집니다.</li>
+      <li>구글 드라이브, iCloud 같은 곳에 올렸다가 컴퓨터에서 내려받기</li>
+     </ul></li>
+    <li><b>그 영상을 바탕화면의 "릴스" 폴더에 넣기.</b> 바탕화면의 <b>릴스</b> 폴더를 두 번 눌러 열고, 옮겨 온 영상 파일을 마우스로 끌어다 그 안에 놓습니다. 폴더 안에 영상이 보이면 된 것입니다. 영상이 여러 개면 <b>가장 최근에 넣은 영상</b>으로 작업합니다.</li>
+    <li><b>Claude 앱을 켜고 왼쪽 위의 Code 누르기.</b> 폴더 버튼에 <b>릴스</b>라고 보이는지 확인하세요. 다른 이름이 보이면 0단계의 6번을 다시 하면 됩니다.</li>
+    <li><b>글 쓰는 칸에 이렇게 쓰고 엔터.</b>
      <div class="say"><i>›</i>릴스 만들어줘</div>
-     1분짜리 영상 기준으로 5~10분쯤 걸립니다. 다 되면 "릴스" 폴더 안에 <b>"완성"</b> 폴더가 생기고, 그 안에 릴스가 들어 있습니다.</li>
+     1분짜리 영상 기준으로 5~10분쯤 걸립니다. 기다리는 동안 "허용할까요?"가 나오면 허용을 누르세요.</li>
+    <li><b>완성본 찾기.</b> 다 되면 바탕화면의 "릴스" 폴더 안에 <b>"완성"</b> 폴더가 생기고, 그 안에 릴스가 들어 있습니다. 이 파일을 휴대폰으로 옮겨 올리면 됩니다.</li>
    </ol>
 
    <h3><mark>3단계</mark> 마음에 안 들면 말로 고치기</h3>
@@ -244,7 +259,7 @@ footer a{color:var(--sub)}
     <dt>"릴스 만들어줘"가 안 통해요.</dt><dd>Claude Code를 껐다 켠 뒤 다시 해 보세요. 그래도 안 되면 1단계 설치 문장을 한 번 더 붙여넣으세요.</dd>
    </dl>
 
-   <a class="pdf" href="guide.pdf"><span class="ico">PDF</span><span><b>이 내용을 PDF로 받기</b><small>릴스 자동편집 사용법 · 5쪽</small></span><i>받기 ↓</i></a>
+   <a class="pdf" href="guide.pdf"><span class="ico">PDF</span><span><b>이 내용을 PDF로 받기</b><small>왕초보를 위한 설명서 · 릴스 자동편집 · 6쪽</small></span><i>받기 ↓</i></a>
    <p class="cap">인스타그램 안에서는 PDF가 안 열릴 수 있습니다. 그럴 땐 오른쪽 위 ⋯ 를 눌러 "외부 브라우저에서 열기"를 고르거나, 이 페이지를 그대로 보셔도 내용은 같습니다.</p>
   </div>
  </details>
@@ -252,6 +267,7 @@ footer a{color:var(--sub)}
  <details class="menu" id="skin">
   <summary><span class="no">02</span><span class="mt"><b>피부 보정 · 화장</b><small>피부 보정 · 입술색 · 블러셔 · 눈 화장 · 선글라스</small></span></summary>
   <div class="body">
+   <p class="newbie"><b>왕초보를 위한 설명서</b>컴퓨터를 잘 몰라도 됩니다. 어려운 말 없이 적었으니, 위에서부터 순서대로만 따라 하세요.</p>
    <p class="intro">영상 속 얼굴을 찾아 피부만 깨끗하게 보정하고, 원하면 입술색, 블러셔, 눈 화장을 얹습니다. 말하거나 고개를 돌려도 따라갑니다.</p>
    <div class="say"><i>›</i>화장해줘</div>
    <div class="ba"><div><img src="skin_before.jpg" alt="보정 전" loading="lazy"><b>전</b></div><div><img src="skin_after.jpg" alt="보정 후" loading="lazy"><b class="on">후</b></div></div>
@@ -263,28 +279,50 @@ footer a{color:var(--sub)}
 
    <h3>준비물</h3>
    <ul>
-    <li><b>Claude Code</b> (유료 요금제 Pro 이상. 처음이라면 위 <a class="link" href="#edit">01 릴스 자동편집</a>의 0단계부터)</li>
+    <li><b>Claude Code</b> (유료 요금제 Pro 이상. 처음이라면 아래 0단계부터)</li>
     <li><b>컴퓨터</b> (Windows 또는 Mac)와 인터넷</li>
     <li><b>얼굴이 나오는 영상</b> (휴대폰으로 찍은 영상이면 충분합니다)</li>
    </ul>
 
+   <h3><mark>0단계</mark> Claude Code 처음 켜기</h3>
+   <p class="cap">이미 Claude Code를 쓰고 있다면 건너뛰세요. 처음이라면 여기가 가장 중요합니다.</p>
+   <ol>
+    <li><b>Claude 앱 받아서 설치하기.</b> 컴퓨터에서 <a class="link" href="https://claude.com/download">claude.com/download</a> 에 들어가 내 컴퓨터(Windows 또는 Mac)에 맞는 버튼을 누르고, 받은 파일을 실행합니다.</li>
+    <li><b>앱을 켜고 로그인하기.</b> Claude Code는 유료 요금제(Pro 이상)에서만 쓸 수 있습니다. 무료 계정이면 요금제를 올리라는 안내가 나옵니다.</li>
+    <li><b>바탕화면에 "릴스" 폴더 만들기.</b> 바탕화면 빈 곳에서 마우스 오른쪽 버튼 → 새로 만들기 → 폴더 → 이름을 <b>릴스</b>로 적고 엔터. (Mac은 오른쪽 버튼 → 새로운 폴더) <b>앞으로 찍은 영상은 전부 이 폴더에 넣습니다.</b></li>
+    <li><b>Claude 앱에서 Code 누르기.</b> 앱을 켜면 보통 대화하는 화면이 먼저 나옵니다. 앱 <b>왼쪽 위</b>에 있는 <span class="key">Code</span> 를 누르면 Claude Code 화면으로 바뀝니다. 글자 없이 그림만 보이면 마우스를 올려 이름을 확인하세요.</li>
+    <li><b>Local 고르기.</b> 화면 가운데 글 쓰는 칸이 있습니다. 그 <b>바로 아래 줄의 첫 번째 버튼</b>을 눌러 <span class="key">Local</span> 을 고릅니다. "내 컴퓨터에서 작업한다"는 뜻입니다.</li>
+    <li><b>"릴스" 폴더 연결하기.</b> 방금 누른 버튼 <b>바로 옆의 폴더 버튼</b>을 누르고 <span class="key">Open folder…</span> 를 고릅니다. 파일 고르는 창이 뜨면 왼쪽에서 <b>바탕화면(Desktop)</b>을 누르고, <b>릴스</b> 폴더를 한 번 눌러 고른 뒤 아래의 <b>폴더 선택</b>(Mac은 <b>열기</b>)을 누릅니다.</li>
+    <li><b>연결됐는지 확인하기.</b> 폴더 버튼에 <b>릴스</b>라고 보이면 끝입니다. 이제 글 쓰는 칸에 말을 걸 수 있습니다. 한 번 연결해 두면 다음부터는 Code만 누르면 됩니다.</li>
+   </ol>
+   <p class="tip">버튼 이름은 한글로 보일 수도 있습니다. 도중에 <b>"허용할까요?"</b> 같은 창이 뜨면 <b>허용(Allow)</b>을 누르세요. Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</p>
+
    <h3><mark>1단계</mark> 설치 (처음 한 번만)</h3>
    <ol>
-    <li><b>Claude Code의 글 쓰는 칸에 아래 한 줄을 그대로 붙여넣고 엔터.</b>
+    <li><b>글 쓰는 칸에 아래 한 줄을 그대로 붙여넣고 엔터.</b> 오른쪽의 "복사"를 누른 뒤, 글 쓰는 칸을 한 번 누르고 붙여넣기(Windows는 Ctrl+V, Mac은 ⌘+V) 하면 됩니다.
      <div class="copy"><code id="cmd2">https://github.com/keun4jang/reels-kit 설치해줘</code><button type="button" data-copy="cmd2">복사</button></div>
-     Claude가 필요한 도구를 알아서 설치합니다. 5~10분쯤 걸립니다.</li>
-    <li><b>"설치가 끝났습니다"가 나오면 완료.</b> 앱을 한 번 껐다가 다시 켜 주세요.</li>
+     Claude가 필요한 도구를 알아서 설치합니다. 5~10분쯤 걸립니다. 그동안 "허용할까요?"가 여러 번 나오면 계속 허용을 누르세요.</li>
+    <li><b>"설치가 끝났습니다"가 나오면 완료.</b> 앱을 한 번 껐다가 다시 켜 주세요. (바탕화면에 "릴스" 폴더가 없었다면 이때 자동으로 생깁니다)</li>
    </ol>
    <p class="tip"><b>릴스 자동편집 키트를 이미 설치하셨나요?</b> 같은 키트에 피부 보정이 추가됐습니다. 위 한 줄을 한 번 더 붙여넣으면 새 기능이 들어옵니다.</p>
 
    <h3><mark>2단계</mark> 보정 · 화장하기</h3>
    <ol>
-    <li><b>바탕화면의 "릴스" 폴더에 영상 넣기.</b> 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</li>
-    <li><b>Claude 앱의 Code 화면에서 이렇게 쓰고 엔터.</b>
+    <li><b>휴대폰으로 찍은 영상을 컴퓨터로 옮기기.</b> 편한 방법 하나만 쓰면 됩니다.
+     <ul class="sub">
+      <li>아이폰 → Mac: 사진 앱에서 영상을 고르고 공유 → <b>AirDrop</b> → 내 Mac</li>
+      <li>케이블: 휴대폰을 컴퓨터에 <b>충전 케이블</b>로 연결해 영상 파일을 꺼내기</li>
+      <li>카카오톡: <b>나와의 채팅</b>에 영상을 보내고 컴퓨터 카카오톡에서 내려받기. 보낼 때 화질을 <b>원본</b>으로 고르세요. 안 그러면 화질이 떨어집니다.</li>
+      <li>구글 드라이브, iCloud 같은 곳에 올렸다가 컴퓨터에서 내려받기</li>
+     </ul></li>
+    <li><b>그 영상을 바탕화면의 "릴스" 폴더에 넣기.</b> 바탕화면의 <b>릴스</b> 폴더를 두 번 눌러 열고, 옮겨 온 영상 파일을 마우스로 끌어다 그 안에 놓습니다. 폴더 안에 영상이 보이면 된 것입니다. 영상이 여러 개면 <b>가장 최근에 넣은 영상</b>으로 작업합니다.</li>
+    <li><b>Claude 앱을 켜고 왼쪽 위의 Code 누르기.</b> 폴더 버튼에 <b>릴스</b>라고 보이는지 확인하세요. 다른 이름이 보이면 0단계의 6번을 다시 하면 됩니다.</li>
+    <li><b>글 쓰는 칸에 이렇게 쓰고 엔터.</b>
      <div class="say"><i>›</i>피부 보정해줘</div>
      화장까지 하려면
      <div class="say"><i>›</i>화장해줘</div>
-     1분짜리 영상 기준으로 3~5분쯤 걸립니다. 다 되면 "릴스" 폴더 안에 <b>"피부보정"</b> 폴더가 생기고, 그 안에 보정된 영상과 전/후 비교 그림이 들어 있습니다.</li>
+     1분짜리 영상 기준으로 3~5분쯤 걸립니다. 기다리는 동안 "허용할까요?"가 나오면 허용을 누르세요.</li>
+    <li><b>완성본 찾기.</b> 다 되면 바탕화면의 "릴스" 폴더 안에 <b>"피부보정"</b> 폴더가 생기고, 그 안에 보정된 영상과 전/후 비교 그림이 들어 있습니다.</li>
    </ol>
 
    <h3><mark>3단계</mark> 말로 조절하기</h3>
@@ -309,7 +347,7 @@ footer a{color:var(--sub)}
     <dt>"피부 보정해줘"가 안 통해요.</dt><dd>Claude Code를 껐다 켠 뒤 다시 해 보세요. 그래도 안 되면 1단계 설치 문장을 한 번 더 붙여넣으세요.</dd>
    </dl>
 
-   <a class="pdf" href="guide-skin.pdf"><span class="ico">PDF</span><span><b>이 내용을 PDF로 받기</b><small>피부 보정 · 화장 사용법 · 5쪽</small></span><i>받기 ↓</i></a>
+   <a class="pdf" href="guide-skin.pdf"><span class="ico">PDF</span><span><b>이 내용을 PDF로 받기</b><small>왕초보를 위한 설명서 · 피부 보정 · 화장 · 6쪽</small></span><i>받기 ↓</i></a>
    <p class="cap">인스타그램 안에서는 PDF가 안 열릴 수 있습니다. 그럴 땐 오른쪽 위 ⋯ 를 눌러 "외부 브라우저에서 열기"를 고르거나, 이 페이지를 그대로 보셔도 내용은 같습니다.</p>
   </div>
  </details>

@@ -38,13 +38,18 @@ li{font-size:13pt;line-height:1.7}
 .card.tight h3{font-size:16pt}
 .key{display:inline-block;background:#16161A;color:#FFE033;border-radius:6pt;padding:0 6pt;font-weight:700}
 .note{background:#FFF6C2;border-radius:12pt;padding:5mm 7mm;font-size:11.5pt;line-height:1.55}
+.newbie{display:inline-block;background:#16161A;color:#FFE033;border-radius:8pt;padding:3pt 11pt;font-weight:900;font-size:12pt;margin-top:12mm}
+.sub{margin:1mm 0 2mm;padding-left:5mm}.sub li{font-size:11pt;line-height:1.55;color:#6B6B76}
+.small b,.sub b{color:#16161A}
 .foot{position:absolute;left:18mm;bottom:12mm;font-size:9pt;color:#8E8E99}
 </style></head><body>
 
 <div class="page">
  <div class="brand">릴스 자동편집</div><div class="pill">사용법</div>
- <h1>영상 넣고<br><mark>"릴스 만들어줘"</mark><br>한마디면 끝</h1>
+ <div class="newbie">왕초보를 위한 설명서</div>
+ <h1 style="margin-top:6mm">영상 넣고<br><mark>"릴스 만들어줘"</mark><br>한마디면 끝</h1>
  <p class="lead">Claude Code가 쉬는 구간을 잘라내고,<br>자막 · 그래픽 · 효과음까지 넣어 줍니다.</p>
+ <p class="small">컴퓨터를 잘 몰라도 됩니다. 첫 장부터 순서대로만 따라 하세요.</p>
  <div class="shots"><img src="ex1.jpg"><img src="ex3.jpg"><img src="ex2.jpg"></div>
  <p class="small" style="margin-top:5mm">위 화면은 이 키트로 만든 실제 릴스입니다.</p>
  <div class="foot">github.com/keun4jang/reels-kit</div>
@@ -67,12 +72,29 @@ li{font-size:13pt;line-height:1.7}
   <h3>바탕화면에 "릴스" 폴더 만들기</h3>
   <p class="small">바탕화면 빈 곳에서 <b>마우스 오른쪽 버튼</b> → <b>새로 만들기</b> → <b>폴더</b> → 이름을 <b>릴스</b>로 적고 엔터.<br>(Mac은 오른쪽 버튼 → 새로운 폴더)</p>
  </div></div></div>
+ <div class="note"><b>이 폴더가 중요합니다.</b> 앞으로 찍은 영상은 전부 바탕화면의 "릴스" 폴더에 넣습니다. 다음 장에서 Claude를 이 폴더에 연결합니다.</div>
+ <div class="foot">github.com/keun4jang/reels-kit</div>
+</div>
+
+<div class="page">
+ <div class="brand">릴스 자동편집</div><div class="pill">처음이라면</div>
+ <h2 style="margin-top:10mm"><mark>0단계</mark> Claude를 폴더에 연결하기</h2>
+ <p class="small" style="margin-bottom:5mm">처음 한 번만 하면 됩니다. 다음부터는 Code만 누르면 돼요.</p>
  <div class="card tight"><div class="step"><div class="num">4</div><div>
-  <h3>앱에서 그 폴더 열기</h3>
-  <p class="small">① 앱 왼쪽 위의 <span class="key">Code</span> 를 누릅니다. (그림만 보이면 마우스를 올려 이름을 확인하세요)<br>
-  ② 글 쓰는 칸 바로 아래 줄에서 첫 번째 버튼을 눌러 <span class="key">Local</span> 을 고릅니다.<br>
-  ③ 그 옆의 폴더 버튼을 눌러 <span class="key">Open folder…</span> → 바탕화면의 <b>릴스</b> 폴더를 고릅니다.</p>
-  <p class="small">이제 글 쓰는 칸에 말을 걸 수 있어요. 버튼 이름은 한글로 보일 수도 있습니다.</p>
+  <h3>앱 왼쪽 위의 Code 누르기</h3>
+  <p class="small">앱을 켜면 보통 대화하는 화면이 먼저 나옵니다. <b>왼쪽 위</b>의 <span class="key">Code</span> 를 누르면 Claude Code 화면으로 바뀝니다. 글자 없이 그림만 보이면 마우스를 올려 이름을 확인하세요.</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">5</div><div>
+  <h3>Local 고르기</h3>
+  <p class="small">화면 가운데 글 쓰는 칸이 있습니다. 그 <b>바로 아래 줄의 첫 번째 버튼</b>을 눌러 <span class="key">Local</span> 을 고릅니다. "내 컴퓨터에서 작업한다"는 뜻입니다.</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">6</div><div>
+  <h3>"릴스" 폴더 연결하기</h3>
+  <p class="small">방금 누른 버튼 <b>바로 옆의 폴더 버튼</b> → <span class="key">Open folder…</span> 를 누릅니다. 파일 고르는 창이 뜨면 왼쪽에서 <b>바탕화면(Desktop)</b>을 누르고, <b>릴스</b> 폴더를 한 번 눌러 고른 뒤 <b>폴더 선택</b>(Mac은 <b>열기</b>)을 누릅니다.</p>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">7</div><div>
+  <h3>연결됐는지 확인하기</h3>
+  <p class="small">폴더 버튼에 <b>릴스</b>라고 보이면 끝입니다. 이제 글 쓰는 칸에 말을 걸 수 있어요. 버튼 이름은 한글로 보일 수도 있습니다.</p>
  </div></div></div>
  <div class="note">도중에 <b>"허용할까요?"</b> 같은 창이 뜨면 <b>허용(Allow)</b>을 누르세요. Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</div>
  <div class="foot">github.com/keun4jang/reels-kit</div>
@@ -101,46 +123,55 @@ li{font-size:13pt;line-height:1.7}
 
 <div class="page">
  <div class="brand">릴스 자동편집</div><div class="pill">사용</div>
- <h2><mark>2단계</mark> 릴스 만들기</h2>
- <div class="card"><div class="step"><div class="num">1</div><div>
+ <h2 style="margin-top:8mm"><mark>2단계</mark> 릴스 만들기</h2>
+ <div class="card tight"><div class="step"><div class="num">1</div><div>
+  <h3>휴대폰 영상을 컴퓨터로 옮기기</h3>
+  <ul class="sub">
+   <li>아이폰 → Mac: 공유 → <b>AirDrop</b> → 내 Mac</li>
+   <li><b>충전 케이블</b>로 컴퓨터에 연결해 영상 파일 꺼내기</li>
+   <li>카카오톡 <b>나와의 채팅</b>으로 보내기 (화질은 <b>원본</b>으로)</li>
+   <li>구글 드라이브, iCloud에 올렸다가 내려받기</li>
+  </ul>
+ </div></div></div>
+ <div class="card tight"><div class="step"><div class="num">2</div><div>
   <h3>바탕화면의 "릴스" 폴더에 영상 넣기</h3>
   <div class="pic"><span class="vid">▶ 내 영상</span><span class="arr">→</span><span class="fold">릴스</span></div>
-  <p class="small">0단계에서 만든 그 폴더예요. 찍은 영상을 마우스로 끌어다 놓으면 됩니다.</p>
+  <p class="small"><b>릴스</b> 폴더를 두 번 눌러 열고, 영상 파일을 마우스로 끌어다 그 안에 놓습니다. 여러 개면 가장 최근에 넣은 영상으로 작업합니다.</p>
  </div></div></div>
- <div class="card"><div class="step"><div class="num">2</div><div>
-  <h3>Claude 앱을 켜고 Code 누르기</h3>
-  <p class="small">0단계의 4번처럼 <b>Code</b> 화면으로 들어가면 됩니다. 폴더는 한 번 골라 두었으면 그대로예요.</p>
+ <div class="card tight"><div class="step"><div class="num">3</div><div>
+  <h3>Claude 앱을 켜고 왼쪽 위의 Code 누르기</h3>
+  <p class="small">폴더 버튼에 <b>릴스</b>라고 보이는지 확인하세요. 다른 이름이 보이면 0단계의 6번을 다시 하면 됩니다.</p>
  </div></div></div>
- <div class="card"><div class="step"><div class="num">3</div><div>
-  <h3>이렇게 쓰고 엔터</h3>
+ <div class="card tight"><div class="step"><div class="num">4</div><div>
+  <h3>글 쓰는 칸에 이렇게 쓰고 엔터</h3>
   <div class="code"><b>›</b>릴스 만들어줘</div>
   <p class="small">1분짜리 영상 기준으로 5~10분쯤 걸립니다. 다 되면 "릴스" 폴더 안에 <b>"완성"</b> 폴더가 생기고, 그 안에 릴스가 들어 있어요.</p>
  </div></div></div>
- <h2><mark>3단계</mark> 마음에 안 들면 말로 고치기</h2>
- <div class="card">
-  <span class="say">자막 더 크게</span><span class="say">효과음 줄여줘</span><span class="say">영문 자막 빼줘</span><span class="say">그래픽 없이 깔끔하게</span><span class="say">더 신나게</span><span class="say">이 부분은 빼줘</span>
- </div>
  <div class="foot">github.com/keun4jang/reels-kit</div>
 </div>
 
 <div class="page">
- <div class="brand">릴스 자동편집</div><div class="pill">팁</div>
- <h2>잘 나오게 찍는 법</h2>
- <div class="card"><ul>
+ <div class="brand">릴스 자동편집</div><div class="pill">조절 · 팁</div>
+ <h2 style="margin-top:10mm"><mark>3단계</mark> 마음에 안 들면 말로 고치기</h2>
+ <div class="card tight">
+  <span class="say">자막 더 크게</span><span class="say">효과음 줄여줘</span><span class="say">영문 자막 빼줘</span><span class="say">그래픽 없이 깔끔하게</span><span class="say">더 신나게</span><span class="say">이 부분은 빼줘</span>
+ </div>
+ <h2 style="margin-top:7mm">잘 나오게 찍는 법</h2>
+ <div class="card tight"><ul>
   <li>휴대폰을 <b>세로</b>로 들고 찍기</li>
   <li><b>문장 사이에 1초</b> 쉬기 (자를 자리가 깔끔해집니다)</li>
   <li>틀리면 멈추지 말고 <b>그 문장을 처음부터 다시</b> 말하기 (마지막 것만 남깁니다)</li>
   <li>조용한 곳에서, 가능하면 마이크 쓰기 (자막이 정확해집니다)</li>
  </ul></div>
- <h2>자주 묻는 질문</h2>
- <div class="card">
+ <h2 style="margin-top:7mm">자주 묻는 질문</h2>
+ <div class="card tight">
   <p class="q" style="margin-top:0">돈이 더 드나요?</p>
   <p class="small">키트는 무료입니다. Claude Code 요금제의 사용량만 씁니다.</p>
-  <p class="q">내 영상이 어디로 올라가나요?</p>
+  <p class="q" style="margin-top:3.5mm">내 영상이 어디로 올라가나요?</p>
   <p class="small">아니요. 편집은 내 컴퓨터 안에서 합니다. 다만 받아쓴 글과 확인용 장면 몇 장은 Claude가 읽습니다.</p>
-  <p class="q">결과가 매번 완벽한가요?</p>
+  <p class="q" style="margin-top:3.5mm">결과가 매번 완벽한가요?</p>
   <p class="small">아닙니다. 자막 오타나 어색한 컷이 남을 수 있습니다. 올리기 전에 한 번 보고, 고칠 곳을 말로 알려 주세요.</p>
-  <p class="q">"릴스 만들어줘"가 안 통해요.</p>
+  <p class="q" style="margin-top:3.5mm">"릴스 만들어줘"가 안 통해요.</p>
   <p class="small">Claude Code를 껐다 켠 뒤 다시 해 보세요. 그래도 안 되면 1단계 설치 문장을 한 번 더 붙여넣으세요.</p>
  </div>
  <div class="foot">github.com/keun4jang/reels-kit</div>
