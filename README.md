@@ -21,6 +21,12 @@ https://github.com/keun4jang/reels-kit 설치해줘
 
 고치고 싶으면 말로 하면 됩니다: "자막 더 크게", "효과음 줄여줘", "영문 자막 빼줘", "그래픽 없이 깔끔하게".
 
+## 피부 보정
+
+영상을 `릴스` 폴더에 넣고 `피부 보정해줘` 라고 하면, 얼굴을 찾아 피부만 깨끗하게 보정한 영상을 `피부보정` 폴더에 만들어 줍니다. 눈, 입술, 머리카락은 선명하게 그대로 둡니다. "더 강하게", "더 자연스럽게"라고 말해 조절합니다.
+
+`화장해줘` 라고 하면 입술색, 블러셔, 눈 화장, 피부 톤업을 얹어 줍니다. "입술은 코랄로", "눈 화장은 빼줘", "선글라스 씌워줘"처럼 말하면 됩니다.
+
 ## 필요한 것
 
 - Claude Code (유료 요금제)
@@ -47,4 +53,5 @@ https://github.com/keun4jang/reels-kit 설치해줘
 - `scripts/` 편집 스크립트, `SKILL.md` 작업 설명서: MIT
 - `assets/fonts/` Pretendard: SIL Open Font License 1.1
 - `assets/models/yunet.onnx` 얼굴 인식 모델(OpenCV Zoo YuNet): MIT
+- `assets/models/face_landmarker.task` 얼굴 윤곽 인식 모델(Google MediaPipe Face Landmarker): Apache License 2.0
 - `assets/sfx/` 효과음: 이 키트의 `scripts/sfx.py` 로 합성한 것으로 자유롭게 써도 됩니다.

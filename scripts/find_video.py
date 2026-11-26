@@ -3,7 +3,7 @@
 import os, subprocess, sys
 
 EXT = (".mp4", ".mov", ".m4v")
-SKIP = ("완성", "릴스작업", "work", "node_modules")
+SKIP = ("완성", "릴스작업", "피부보정", "work", "node_modules")
 
 
 def desktop():

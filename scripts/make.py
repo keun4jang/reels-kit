@@ -31,6 +31,18 @@ def main():
     if not (os.path.exists(base) and os.path.exists(stamp) and open(stamp, encoding="utf-8").read() == sig):
         say("1/2 컷 이어붙이는 중...")
         subprocess.run([sys.executable, os.path.join(HERE, "base.py"), edit, base], check=True)
+        look = plan.get("look") or {}
+        skin = float(look.get("skin", 0) or 0)
+        extra = []          # 화장: 입술색, 블러셔, 톤업, 선글라스
+        for key in ("lip", "blush", "tone", "eye", "glasses"):
+            if look.get(key):
+                extra += ["--" + key, str(look[key])]
+        if skin > 0 or extra:   # 피부만 골라 보정 (눈·머리카락은 그대로)
+            say("    피부 보정 중...")
+            pre = os.path.join(work, "base_pre.mp4")
+            os.replace(base, pre)
+            subprocess.run([sys.executable, os.path.join(HERE, "skin.py"), pre, base, "--strength", str(skin), *extra], check=True)
+            os.remove(pre)
         open(stamp, "w", encoding="utf-8").write(sig)
     if still:
         subprocess.run([sys.executable, os.path.join(HERE, "gfx.py"), edit, base, "--still", still,

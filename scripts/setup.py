@@ -33,5 +33,12 @@ try:   # 영상을 넣을 폴더를 바탕화면에 만들어 둔다
     print("[확인] 영상 넣는 폴더:", reels_folder())
 except Exception as e:
     print("[참고] 바탕화면에 '릴스' 폴더를 만들지 못했습니다:", e)
+try:   # 얼굴 화장(입술·눈 윤곽)에 쓰는 정밀 인식. 설치가 안 되는 컴퓨터에서는 없이도 돌아간다
+    importlib.import_module("mediapipe")
+    print("[확인] mediapipe")
+except Exception:
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "mediapipe"])
+    print("[확인] mediapipe 설치 완료" if r.returncode == 0 else
+          "[참고] mediapipe 를 설치하지 못했습니다. 피부 보정은 되지만 입술색이 덜 정확하고 눈 화장은 빠집니다")
 print("준비 완료" if ok else "준비 안 됨: 위 [없음]/[실패] 항목을 해결한 뒤 다시 실행")
 sys.exit(0 if ok else 1)
