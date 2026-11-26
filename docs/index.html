@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>근사장 키트 · Claude Code로 영상 자동편집</title>
+<meta name="description" content="찍기만 하세요. 컷편집, 자막, 모션그래픽, 효과음까지 Claude Code가 합니다. 영상감독이 만든 무료 키트.">
+<meta property="og:title" content="근사장 키트 · Claude Code로 영상 자동편집">
+<meta property="og:description" content="찍기만 하세요. 편집은 Claude Code가 합니다.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#F2EFE9;--card:#FFFFFF;--ink:#16161A;--sub:#5A5A64;--mute:#8E8E99;--line:#E2DED5;--yellow:#FFE033;--dark:#1B1B20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:500;line-height:1.6;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+.logo{font-weight:900;font-size:17px;letter-spacing:-.2px;text-decoration:none}
+.logo span{color:var(--mute);font-weight:600;margin-left:6px;font-size:13px}
+.pill{border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+.pill:hover{background:var(--ink);color:#fff}
+
+.hero{padding:44px 0 36px}
+.eyebrow{display:inline-block;font-weight:700;font-size:13px;color:var(--sub);border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;margin-bottom:20px}
+h1{font-weight:900;font-size:clamp(38px,9.4vw,72px);line-height:1.12;letter-spacing:-1.5px;margin:0 0 20px}
+h1 mark,h2 mark{background:var(--yellow);color:inherit;padding:0 .12em;border-radius:.14em}
+.lead{font-size:clamp(16px,4.2vw,20px);color:var(--sub);max-width:560px;margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;padding:15px 22px;font-weight:800;font-size:16px;text-decoration:none;border:0;cursor:pointer;font-family:inherit}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:#000}
+.btn.line{background:transparent;border:1.5px solid var(--ink);color:var(--ink)}
+.btn.line:hover{background:#fff}
+.btn.yellow{background:var(--yellow);color:var(--ink)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font-size:14px;color:var(--sub);font-weight:600}
+.facts b{color:var(--ink);font-weight:800}
+
+section{padding:44px 0}
+h2{font-weight:900;font-size:clamp(26px,6.4vw,38px);letter-spacing:-.8px;line-height:1.2;margin:0 0 8px}
+.sec-sub{color:var(--sub);margin:0 0 26px;font-size:16px}
+
+.tools{display:grid;gap:16px}
+.tool{background:var(--card);border-radius:22px;padding:24px;box-shadow:0 8px 28px rgba(22,22,26,.07);display:grid;gap:20px}
+.no{font-weight:900;font-size:13px;color:var(--mute);letter-spacing:1px}
+.tool h3{font-weight:900;font-size:24px;letter-spacing:-.5px;margin:4px 0 8px}
+.tool p{margin:0 0 14px;color:var(--sub);font-size:15.5px}
+.say{display:flex;align-items:center;gap:10px;background:var(--dark);color:#fff;border-radius:12px;padding:13px 16px;font-weight:700;font-size:16px;margin-bottom:14px}
+.say i{color:#FF8A3D;font-style:normal;font-weight:900}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tags span{background:var(--bg);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;color:var(--sub)}
+.link{font-weight:800;font-size:15px;text-decoration:none;border-bottom:2px solid var(--yellow);padding-bottom:1px}
+.shots{display:flex;gap:10px}
+.shots img{width:0;flex:1;border-radius:12px;display:block;aspect-ratio:9/16;object-fit:cover;background:#ddd}
+.ba{display:flex;gap:10px}
+.ba div{position:relative;flex:1}
+.ba img{width:100%;border-radius:12px;display:block;aspect-ratio:1;object-fit:cover}
+.ba b{position:absolute;left:10px;top:10px;background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-size:13px}
+.ba b.on{background:var(--yellow);color:var(--ink)}
+
+.steps{display:grid;gap:14px;counter-reset:s}
+.step{background:var(--card);border-radius:18px;padding:22px;display:flex;gap:16px;box-shadow:0 8px 28px rgba(22,22,26,.06)}
+.step:before{counter-increment:s;content:counter(s);flex:none;width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--yellow);font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center}
+.step h3{margin:5px 0 6px;font-size:18px;font-weight:900;letter-spacing:-.3px}
+.step p{margin:0;color:var(--sub);font-size:15px}
+.step > div{min-width:0;flex:1}
+.copy{display:flex;align-items:stretch;gap:8px;margin:12px 0 8px}
+.copy code{flex:1;min-width:0;background:var(--dark);color:#fff;border-radius:12px;padding:13px 14px;font-family:inherit;font-weight:700;font-size:14px;overflow-x:auto;white-space:nowrap}
+.copy button{flex:none;border:0;border-radius:12px;background:var(--yellow);color:var(--ink);font-family:inherit;font-weight:800;font-size:14px;padding:0 16px;cursor:pointer}
+.note{background:#FFF6C2;border-radius:16px;padding:18px 20px;font-size:15px;margin-top:16px}
+.note b{font-weight:800}
+.note .btn{margin-top:12px;padding:11px 16px;font-size:14px;border-radius:11px}
+
+details{background:var(--card);border-radius:14px;padding:0 20px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:800;font-size:16px;padding:17px 0;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";font-weight:900;color:var(--mute)}
+details[open] summary:after{content:"–"}
+details p{margin:0;padding:0 0 18px;color:var(--sub);font-size:15px}
+
+.guide{background:var(--card);border-radius:18px;padding:0 22px;margin-bottom:12px;box-shadow:0 8px 28px rgba(22,22,26,.06)}
+.guide summary{font-size:18px;font-weight:900;padding:20px 0}
+.guide summary small{display:block;font-weight:600;font-size:13.5px;color:var(--mute);margin-top:2px}
+.guide ol{margin:0;padding:0 0 6px;list-style:none;counter-reset:g}
+.guide li{position:relative;padding:0 0 16px 40px;font-size:15.5px;color:var(--sub)}
+.guide li:before{counter-increment:g;content:counter(g);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--yellow);font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+.guide li b{color:var(--ink);font-weight:800}
+.guide .say{display:inline-flex;margin:8px 0 2px;padding:9px 14px;font-size:15px}
+.guide h4{margin:4px 0 10px;font-size:15px;font-weight:900}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:20px}
+.chips span{background:var(--ink);color:#fff;border-radius:8px;padding:4px 10px;font-size:13.5px;font-weight:700}
+.guide ul{margin:0;padding:0 0 20px 18px;color:var(--sub);font-size:15.5px}
+.guide ul li{padding:0 0 6px;position:static}
+.guide ul li:before{display:none}
+.key{display:inline-block;background:var(--ink);color:var(--yellow);border-radius:6px;padding:0 7px;font-weight:700;font-size:14px}
+.pdfs{display:grid;gap:12px;margin-bottom:22px}
+.pdf{display:flex;align-items:center;gap:16px;background:var(--card);border-radius:18px;padding:20px 22px;text-decoration:none;box-shadow:0 8px 28px rgba(22,22,26,.07);border:1.5px solid transparent}
+.pdf:hover{border-color:var(--ink)}
+.pdf .ico{flex:none;width:46px;height:56px;border-radius:8px;background:var(--ink);color:var(--yellow);font-weight:900;font-size:12px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+.pdf span:nth-child(2){flex:1;min-width:0}
+.pdf b{display:block;font-weight:900;font-size:17.5px;letter-spacing:-.3px}
+.pdf small{display:block;color:var(--mute);font-size:13.5px;font-weight:600}
+.pdf i{flex:none;font-style:normal;font-weight:800;font-size:14px;background:var(--yellow);border-radius:10px;padding:8px 12px}
+@media(min-width:820px){.pdfs{grid-template-columns:1fr 1fr}}
+.no em{font-style:normal;background:var(--yellow);color:var(--ink);border-radius:6px;padding:2px 8px;margin-left:6px;letter-spacing:0}
+.pdf.soon{opacity:.6}
+.pdf.soon i{background:var(--bg);color:var(--sub)}
+.follow{background:var(--ink);color:#fff;border-radius:26px;padding:38px 26px;text-align:center;margin:20px 0 0}
+.follow h2{color:#fff}
+.follow p{color:#B9B9C4;margin:0 0 22px}
+footer{padding:30px 0 44px;color:var(--mute);font-size:13px;text-align:center}
+footer a{color:var(--sub)}
+
+@media(min-width:820px){
+ .wrap{padding:0 32px}
+ .hero{padding:80px 0 60px}
+ section{padding:64px 0}
+ .tool{grid-template-columns:1.05fr 1fr;align-items:center;padding:36px;gap:36px}
+ .tool:nth-child(even) .pic{order:-1}
+ .steps{grid-template-columns:repeat(3,1fr)}
+ .step{flex-direction:column}
+ .follow{padding:60px 40px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+ <a class="logo" href="#top">근사장<span>영상감독</span></a>
+ <a class="pill" href="https://www.instagram.com/keun4jang/">@keun4jang</a>
+</header>
+
+<div class="hero" id="top">
+ <span class="eyebrow">Claude Code용 무료 키트</span>
+ <h1>찍기만 하세요.<br>편집은 <mark>말 한마디</mark>로.</h1>
+ <p class="lead">영상을 폴더에 넣고 Claude Code에 말하면 컷편집, 자막, 모션그래픽, 효과음까지 알아서 해 줍니다. 현업 영상감독이 직접 쓰려고 만든 도구입니다.</p>
+ <div class="btns">
+  <a class="btn dark" href="#start">3분 만에 시작하기</a>
+  <a class="btn line" href="#tools">무엇을 해 주나요</a>
+ </div>
+ <div class="facts"><span><b>무료</b> · 가입 없음</span><span><b>내 컴퓨터</b>에서 처리</span><span><b>Windows · Mac</b></span></div>
+</div>
+
+<section id="tools">
+ <h2>이런 걸 해 줍니다</h2>
+ <p class="sec-sub">키트 하나에 기능이 계속 추가됩니다.</p>
+ <div class="tools">
+
+  <div class="tool">
+   <div>
+    <div class="no">01</div>
+    <h3>릴스 자동편집</h3>
+    <p>말하는 영상을 올릴 수 있는 세로 릴스로 만듭니다. 쉬는 구간과 다시 말한 문장을 잘라내고, 한글·영문 자막과 모션그래픽, 효과음을 넣습니다.</p>
+    <div class="say"><i>›</i>릴스 만들어줘</div>
+    <div class="tags"><span>컷편집</span><span>한글+영문 자막</span><span>모션그래픽</span><span>효과음</span></div>
+    <a class="link" href="guide.pdf">사용법 PDF 받기 →</a>
+   </div>
+   <div class="pic"><div class="shots"><img src="ex1.jpg" alt="자동편집 예시 1" loading="lazy"><img src="ex3.jpg" alt="자동편집 예시 2" loading="lazy"><img src="ex2.jpg" alt="자동편집 예시 3" loading="lazy"></div></div>
+  </div>
+
+  <div class="tool">
+   <div>
+    <div class="no">02 <em>곧 공개</em></div>
+    <h3>피부 보정 · 화장</h3>
+    <p>영상 속 얼굴을 찾아 피부만 깨끗하게 보정하고, 원하면 입술색, 블러셔, 눈 화장을 얹습니다. 말하거나 고개를 돌려도 따라갑니다.</p>
+    <div class="say"><i>›</i>화장해줘</div>
+    <div class="tags"><span>피부 보정</span><span>입술색</span><span>블러셔</span><span>눈 화장</span><span>선글라스</span></div>
+    <a class="link" href="https://www.instagram.com/keun4jang/">공개되면 인스타그램에서 알려드려요 →</a>
+   </div>
+   <div class="pic"><div class="ba"><div><img src="skin_before.jpg" alt="보정 전" loading="lazy"><b>전</b></div><div><img src="skin_after.jpg" alt="보정 후" loading="lazy"><b class="on">후</b></div></div></div>
+  </div>
+
+ </div>
+</section>
+
+<section id="start">
+ <h2><mark>3단계</mark>로 시작하기</h2>
+ <p class="sec-sub">컴퓨터에서 진행합니다. 처음 한 번만 설치하면 됩니다.</p>
+ <div class="steps">
+  <div class="step"><div>
+   <h3>Claude 앱 준비</h3>
+   <p>컴퓨터에 Claude 앱을 설치하고 로그인한 뒤 <b>Code</b> 화면을 엽니다. 유료 요금제(Pro 이상)가 필요합니다.</p>
+   <p style="margin-top:8px"><a class="link" href="https://claude.com/download">claude.com/download</a></p>
+  </div></div>
+  <div class="step"><div>
+   <h3>아래 한 줄 붙여넣기</h3>
+   <div class="copy"><code id="cmd">https://github.com/keun4jang/reels-kit 설치해줘</code><button type="button" data-copy="cmd">복사</button></div>
+   <p>필요한 도구를 Claude가 알아서 설치합니다. 5~10분쯤 걸립니다.</p>
+  </div></div>
+  <div class="step"><div>
+   <h3>영상 넣고 말하기</h3>
+   <p>바탕화면에 생긴 <b>릴스</b> 폴더에 영상을 넣고 <b>"릴스 만들어줘"</b>라고 입력합니다.</p>
+  </div></div>
+ </div>
+ <div class="note">
+  <b>지금 휴대폰으로 보고 계신가요?</b> 설치는 컴퓨터에서 해야 합니다. 이 페이지 주소를 복사해 두었다가 컴퓨터에서 열어 주세요.
+  <div><button class="btn dark" type="button" data-copy="url">이 페이지 주소 복사</button></div>
+ </div>
+</section>
+
+<section id="guide">
+ <h2>사용법 PDF</h2>
+ <p class="sec-sub">기능마다 따로 정리합니다. 그림을 보며 그대로 따라 하면 됩니다.</p>
+ <div class="pdfs">
+  <a class="pdf" href="guide.pdf"><span class="ico">PDF</span><span><b>릴스 자동편집 사용법</b><small>설치 · "릴스 만들어줘" · 말로 고치기 · 5쪽</small></span><i>받기 ↓</i></a>
+  <div class="pdf soon"><span class="ico">PDF</span><span><b>피부 보정 · 화장 사용법</b><small>곧 공개됩니다. 인스타그램에서 먼저 알려드려요</small></span><i>준비 중</i></div>
+ </div>
+ <details class="guide"><summary><span>Claude Code가 처음이라면<small>앱 설치부터 폴더 여는 법까지</small></span></summary>
+  <ol>
+   <li><b>Claude 앱 받기.</b> 컴퓨터에서 <a class="link" href="https://claude.com/download">claude.com/download</a> 에 들어가 내 컴퓨터(Windows 또는 Mac)에 맞는 버튼을 누르고, 받은 파일을 실행합니다.</li>
+   <li><b>앱을 켜고 로그인하기.</b> Claude Code는 유료 요금제(Pro 이상)에서만 쓸 수 있습니다. 무료 계정이면 요금제를 올리라는 안내가 나옵니다.</li>
+   <li><b>바탕화면에 "릴스" 폴더 만들기.</b> 바탕화면 빈 곳에서 마우스 오른쪽 버튼 → 새로 만들기 → 폴더 → 이름을 <b>릴스</b>로 적고 엔터. (Mac은 오른쪽 버튼 → 새로운 폴더)</li>
+   <li><b>앱에서 그 폴더 열기.</b> 앱 왼쪽 위의 <span class="key">Code</span> 를 누릅니다. 글 쓰는 칸 아래에서 <span class="key">Local</span> 을 고르고, 옆의 폴더 버튼 → <span class="key">Open folder…</span> → 바탕화면의 <b>릴스</b> 폴더를 고릅니다. 버튼 이름은 한글로 보일 수도 있습니다.</li>
+   <li><b>"허용할까요?" 창이 뜨면 허용.</b> Claude가 내 컴퓨터에서 작업해도 되는지 묻는 것입니다.</li>
+  </ol>
+ </details>
+
+ <details class="guide"><summary><span>잘 나오게 찍는 법<small>찍을 때 네 가지만 지키면 결과가 달라집니다</small></span></summary>
+  <ul>
+   <li>휴대폰을 <b>세로</b>로 들고, 얼굴이 화면에 크게 나오게 찍기</li>
+   <li><b>문장 사이에 1초</b> 쉬기 (자를 자리가 깔끔해집니다)</li>
+   <li>틀리면 멈추지 말고 <b>그 문장을 처음부터 다시</b> 말하기 (마지막 것만 남깁니다)</li>
+   <li><b>밝고 조용한 곳</b>에서 찍기 (자막이 정확해지고 피부도 잘 나옵니다)</li>
+  </ul>
+ </details>
+</section>
+
+<section id="faq">
+ <h2>자주 묻는 질문</h2>
+ <p class="sec-sub"></p>
+ <details><summary>Claude Code를 한 번도 안 써 봤어요.</summary><p>괜찮습니다. 괜찮습니다. 위 "사용법 PDF" 아래의 "Claude Code가 처음이라면"을 펼치면 앱 설치부터 폴더 여는 법까지 순서대로 나옵니다. 두 PDF의 0단계에도 같은 내용이 그림과 함께 있습니다.</p></details>
+ <details><summary>돈이 드나요?</summary><p>키트는 무료입니다. Claude Code를 쓰려면 Claude 유료 요금제가 필요하고, 그 요금제의 사용량 안에서 돌아갑니다.</p></details>
+ <details><summary>내 영상이 어디로 올라가나요?</summary><p>편집과 보정은 내 컴퓨터 안에서 합니다. 다만 받아쓴 글과 확인용 장면 몇 장은 Claude가 읽습니다.</p></details>
+ <details><summary>결과가 매번 완벽한가요?</summary><p>아닙니다. 자막 오타나 어색한 컷이 남을 수 있습니다. 올리기 전에 한 번 보고 "자막 더 크게", "이 부분 빼줘", "더 자연스럽게"처럼 말로 고치면 됩니다.</p></details>
+ <details><summary>어떤 영상이 잘 되나요?</summary><p>휴대폰으로 세로로 찍은, 한 사람이 말하는 영상이 가장 잘 됩니다. 밝은 곳에서 얼굴이 크게 나오면 보정과 화장도 잘 나옵니다.</p></details>
+</section>
+
+<div class="follow">
+ <h2>새 기능은 인스타그램에서 먼저</h2>
+ <p>기능이 추가될 때마다 릴스로 보여드립니다.<br>팔로우해 두면 같은 키트에 그대로 들어옵니다.</p>
+ <a class="btn yellow" href="https://www.instagram.com/keun4jang/">@keun4jang 팔로우</a>
+</div>
+
+<footer>
+ 만든 사람 근사장 · <a href="https://github.com/keun4jang/reels-kit">GitHub에서 소스 보기</a><br>
+ Claude와 Claude Code는 Anthropic의 제품이며, 이 키트는 Anthropic과 무관한 개인 제작물입니다.
+</footer>
+
+</div>
+<script>
+document.querySelectorAll("[data-copy]").forEach(function (b) {
+  b.addEventListener("click", function () {
+    var k = b.getAttribute("data-copy");
+    var text = k === "url" ? location.href.split("#")[0] : document.getElementById(k).textContent;
+    var done = function () { var t = b.textContent; b.textContent = "복사됨"; setTimeout(function () { b.textContent = t; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, fallback); } else { fallback(); }
+    function fallback() {
+      var a = document.createElement("textarea"); a.value = text; document.body.appendChild(a); a.select();
+      try { document.execCommand("copy"); done(); } catch (e) {} document.body.removeChild(a);
+    }
+  });
+});
+</script>
+</body>
+</html>
