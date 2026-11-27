@@ -2,7 +2,7 @@
 사용: python skin.py <영상> [출력.mp4] [--strength 0.6]
 확인: python skin.py <영상> --still 3.0 [그림.jpg]      (3.0초 장면의 전/후 비교 그림)
 strength 는 0~1 (0.3 은은하게, 0.6 기본, 0.9 강하게, 0 이면 피부 보정 없이 화장만)
-화장: --lip rose|coral|pink|red[:진하기]   --blush 0~1   --tone 0~1   --eye 0~1(눈 화장)   --glasses black|brown
+화장: --lip rose|coral|pink|red[:진하기]   --blush 0~2   --tone 0~1   --eye 0~2(눈 화장)   --eye-color brown|plum|pink   --glasses black|brown
 시간표: --timeline 시간표.json  ([{"at": 초, "fade": 0.2, "skin": 0.6, "lip": "pink", "blush": 0.6, "wipe": 0.5, "glasses": "black"}, ...])"""
 import os, subprocess, sys
 os.environ.setdefault("OPENCV_LOG_LEVEL", "ERROR")
@@ -31,6 +31,7 @@ def probe(src):
 LOOK = {"lip": None, "lip_amt": 0.45, "blush": 0.0, "tone": 0.0, "eye": 0.0, "glasses": None}
 LIPS = {"rose": (190, 85, 100), "coral": (235, 105, 90), "pink": (235, 100, 140), "red": (200, 35, 55)}   # RGB
 SHADES = {"black": ((30, 26, 26), (96, 84, 80)), "brown": ((20, 34, 62), (60, 110, 170))}      # 렌즈 위/아래 색 BGR
+EYE_COLORS = {"brown": (70, 85, 135), "plum": (150, 80, 170), "pink": (160, 130, 235)}       # 눈두덩 색 BGR
 _shade_cache = {}
 
 
@@ -422,7 +423,7 @@ def decode_cmd(src, hdr, extra=()):
 def main():
     import cv2
     args = sys.argv[1:]
-    opt = {"--strength": "0.6", "--still": None, "--lip": None, "--blush": None, "--tone": None, "--eye": None, "--glasses": None, "--timeline": None}
+    opt = {"--strength": "0.6", "--still": None, "--lip": None, "--blush": None, "--tone": None, "--eye": None, "--glasses": None, "--timeline": None, "--eye-color": None}
     show_mask = "--mask" in args
     args = [a for a in args if a != "--mask"]
     for key in list(opt):
@@ -438,8 +439,10 @@ def main():
         name, _, amt = opt["--lip"].partition(":")
         LOOK["lip"], LOOK["lip_amt"] = name, min(1.0, max(0.0, float(amt or 0.45)))
     for key in ("blush", "tone", "eye"):
-        if opt["--" + key]:
-            LOOK[key] = min(1.0, max(0.0, float(opt["--" + key])))
+        if opt["--" + key]:     # 블러셔와 눈 화장은 2까지 (1 넘으면 무대 화장처럼 진하다)
+            LOOK[key] = min(1.0 if key == "tone" else 2.0, max(0.0, float(opt["--" + key])))
+    if opt["--eye-color"]:
+        LOOK["eye_color"] = EYE_COLORS.get(opt["--eye-color"], EYE_COLORS["brown"])
     LOOK["glasses"] = opt["--glasses"]
     events = None
     if opt["--timeline"]:               # 시간에 따라 화장이 바뀌는 시간표 (입력 영상의 초)
